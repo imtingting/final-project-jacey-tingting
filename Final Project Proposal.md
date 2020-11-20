@@ -1,6 +1,5 @@
 CPLN 509
-
-Tingting Huang, Jacey Chang
+<br> Tingting Huang, Jacey Chang
 
 11/19/2020
 
