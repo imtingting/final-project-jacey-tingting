@@ -23,10 +23,10 @@ be listed by housing types.
 ## Data
 
 *Crime data*
-<br>https://cityofphiladelphia.github.io/carto-api-explorer/#incidents_part1_part2 - automatic!
+<br>https://cityofphiladelphia.github.io/carto-api-explorer/#incidents_part1_part2
 
 *Public transportation stops*
-<br>https://www3.septa.org/hackathon/Stops/index.php?req1=65 - automatic!
+<br>https://www3.septa.org/hackathon/Stops/index.php?req1=65
 
 *Grocery, Park*
 <br>Mapbox API
@@ -37,4 +37,4 @@ be listed by housing types.
 The dataset will be hosted by Google BigQuery.
 
 ## Wireframe
-![Wireframe]()
+![Wireframe](https://raw.githubusercontent.com/MUSA-509/final-project-jacey-tingting/main/wireframe1.png?token=AP6SW3AWFU6N6C3EJQ5ODUK7XA7PG)
