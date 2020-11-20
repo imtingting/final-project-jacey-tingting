@@ -1,9 +1,7 @@
 CPLN 509
 <br> Tingting Huang, Jacey Chang
-
-11/19/2020
-
-Final Project Proposal
+<br> 11/19/2020
+<br> Final Project Proposal
 
 
 ## Abstract
@@ -25,13 +23,16 @@ be listed by housing types.
 ## Data
 
 *Crime data*
-https://cityofphiladelphia.github.io/carto-api-explorer/#incidents_part1_part2 - automatic!
-Public transportation stops
-https://www3.septa.org/hackathon/Stops/index.php?req1=65 - automatic!
+<br>https://cityofphiladelphia.github.io/carto-api-explorer/#incidents_part1_part2 - automatic!
+
+*Public transportation stops*
+<br>https://www3.septa.org/hackathon/Stops/index.php?req1=65 - automatic!
+
 *Grocery, Park*
-Mapbox API
+<br>Mapbox API
+
 *Rent*
-Zillow or census data
+<br>Zillow or census data
 
 The dataset will be hosted by Google BigQuery.
 
