@@ -1,7 +1,11 @@
 CPLN 509
+
 Tingting Huang, Jacey Chang
+
 11/19/2020
+
 Final Project Proposal
+
 
 ## Abstract
 Last year, when I was about to move to Philadelphia and looking for an ideal apartment,
@@ -20,6 +24,7 @@ will be added to the map and the most frequent types of crime will be listed. Th
 be listed by housing types.
 
 ## Data
+
 *Crime data*
 https://cityofphiladelphia.github.io/carto-api-explorer/#incidents_part1_part2 - automatic!
 Public transportation stops
