@@ -37,4 +37,4 @@ be listed by housing types.
 The dataset will be hosted by Google BigQuery.
 
 ## Wireframe
-![Wireframe](https://raw.githubusercontent.com/MUSA-509/final-project-jacey-tingting/main/wireframe1.png?token=AP6SW3AWFU6N6C3EJQ5ODUK7XA7PG)
+![Wireframe](https://raw.githubusercontent.com/MUSA-509/final-project-jacey-tingting/main/wireframe1.png?token=AP6SW3DGGCLONXAF4UOGEV27XBAPG)
