@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8"> 
+	<title>collapsibles</title>
+	<link rel="stylesheet" href="https://cdn.staticfile.org/twitter-bootstrap/3.3.7/css/bootstrap.min.css">
+	<script src="https://cdn.staticfile.org/jquery/2.1.1/jquery.min.js"></script>
+	<script src="https://cdn.staticfile.org/twitter-bootstrap/3.3.7/js/bootstrap.min.js"></script>
+</head>
+<body>
+
+<div class="panel-group" id="accordion">
+	<div class="panel panel-default">
+		<div class="panel-heading">
+			<h4 class="panel-title">
+				<a data-toggle="collapse" data-parent="#accordion" 
+				   href="#collapseOne">
+					Amenity
+				</a>
+			</h4>
+		</div>
+		<div id="collapseOne" class="panel-collapse collapse in">
+			<div class="panel-body">
+                <h4>Address entered: {{address}}</h4>
+                <h4>Request time: {{curr_time}}</h4>
+                <p>
+                  In your address, there are:
+                </p>
+                <p>
+                  Your nearest hospital is {{nearest_market1}}, {{nearest_market2}},{{nearest_market3}}.<br />The distance to the nearest one is: {{distance_market}} m.
+                </p>
+			</div>
+		</div>
+	</div>
+	<div class="panel panel-default">
+		<div class="panel-heading">
+			<h4 class="panel-title">
+				<a data-toggle="collapse" data-parent="#accordion" 
+				   href="#collapseTwo">
+					Public Transportation
+				</a>
+			</h4>
+		</div>
+		<div id="collapseTwo" class="panel-collapse collapse">
+			<div class="panel-body">
+				Nihil anim keffiyeh helvetica, craft beer labore wes anderson 
+				cred nesciunt sapiente ea proident. Ad vegan excepteur butcher 
+				vice lomo.
+			</div>
+		</div>
+	</div>
+	<div class="panel panel-default">
+		<div class="panel-heading">
+			<h4 class="panel-title">
+				<a data-toggle="collapse" data-parent="#accordion" 
+				   href="#collapseThree">
+					Crime
+				</a>
+			</h4>
+		</div>
+		<div id="collapseThree" class="panel-collapse collapse">
+			<div class="panel-body">
+				Nihil anim keffiyeh helvetica, craft beer labore wes anderson 
+				cred nesciunt sapiente ea proident. Ad vegan excepteur butcher 
+				vice lomo.
+			</div>
+		</div>
+	</div>
+</div>
+
+</body>
+</html>

@@ -1,9 +1,12 @@
 # MUSA 509
-# HW 4
+# Final Project
 # Tingting Huang, Jacey Chang
-from flask import Flask, Response, render_template, escape, request, url_for
+import io
 import json
 import logging
+import random
+
+from flask import Flask, Response, render_template, escape, request, url_for
 import requests
 from sqlalchemy import create_engine, String, Integer
 from sqlalchemy.sql import text, bindparam
@@ -13,10 +16,16 @@ from shapely.geometry import shape
 from datetime import datetime
 from cartoframes.viz import Layer, Map, color_category_style, popup_element
 
+from bokeh.plotting import figure
+from bokeh.embed import components
+from bokeh.resources import CSSResources, JSResources
+
+bokeh_css = CSSResources(mode="cdn", version="2.2.3", minified=True)
+bokeh_js = JSResources(mode="cdn", version="2.2.3", minified=True)
+
 app = Flask(__name__, template_folder="templates")
 
 bqclient = bigquery.Client.from_service_account_json("Musa509-Lab5-42148b13cb70.json")
-
 
 # load credentials from a file
 with open("pg-credentials.json", "r") as f_in:
@@ -99,7 +108,12 @@ def covid_tests():
         ).fetchone()["zips"]
         return f"The zip code is out of Philadelphia. Try one of {all_zips}"
 
-    nearest_hospital = get_nearest_amenity(resp["longitude"], resp["latitude"])
+    amenity1, amenity2, amenity3 = get_nearest_amenity(resp["longitude"], resp["latitude"])
+    nearest_amenity1 = amenity1['amenity_name']
+    nearest_amenity2 = amenity2['amenity_name']
+    # nearest_amenity1 = nearest_amenity1['amenity_name']
+    # nearest_amenity2 = nearest_hospital[1]['amenity_name']
+    # nearest_amenity3 = nearest_hospital[2]['amenity_name']
 
     html_response = f"""
     <div id="container" style="width:1520">
@@ -118,11 +132,12 @@ def covid_tests():
           </ul>
         </p>
         <p>
-          Your nearest hospital is {nearest_hospital['amenity_name']}.<br />Call ahead at {nearest_hospital['phone_number']}.
+          Your nearest hospital is {nearest_amenity1}, {nearest_amenity2}.<br />Call ahead at {amenity1['phone_number']}.
         </p>
     </div>
 
-    <div id="map" style="background-color:#EEEEEE;height:690px;width:1000px;float:left;"><img style="float: left" src="https://api.mapbox.com/styles/v1/mapbox/light-v10/static/pin-l-embassy+f74e4e({lng},{lat})/{lng},{lat},14/1020x690?access_token={MAPBOX_TOKEN}" alt="Start location"></div>
+    <div id="map" style="background-color:#EEEEEE;height:690px;width:1000px;float:left;"><img style="float: left" 
+    src="https://api.mapbox.com/styles/v1/mapbox/light-v10/static/pin-l-embassy+f74e4e({lng},{lat})/{lng},{lat},14/1020x690?access_token={MAPBOX_TOKEN}" alt="Start location"></div>
 
     <div id="footer" style="background-color:#FFA500;clear:both;text-align:center;"> </div>
     </div>
@@ -132,7 +147,7 @@ def covid_tests():
     return response
 
 
-def get_nearest_amenity(lng, lat, amenity_type="hospital"):
+def get_nearest_amenity(lng, lat, amenity_type="fast_food"):
     job_config = bigquery.QueryJobConfig(
         query_parameters=[
             bigquery.ScalarQueryParameter("poi_category", "STRING", amenity_type),
@@ -151,12 +166,16 @@ def get_nearest_amenity(lng, lat, amenity_type="hospital"):
           FROM `bigquery-public-data.geo_openstreetmap.planet_features`
          WHERE ('amenity', @poi_category) IN (SELECT (key, value) FROM UNNEST(all_tags))
          ORDER BY distance_away_meters ASC
-         LIMIT 1
+         LIMIT 5
     """
-    response = [
-        dict(row) for row in bqclient.query(query, job_config=job_config).result()
-    ]
-    return response[0]
+    # response = [
+    #     dict(row) for row in bqclient.query(query, job_config=job_config).result()
+    # ]
+    # # response = bqclient.query(query, job_config=job_config)
+    # return response
+    response = [dict(row) for row in bqclient.query(query, job_config=job_config).result()]
+    return response[0], response[1], response[2]
+
 
 
 @app.route("/to_meyerson/")

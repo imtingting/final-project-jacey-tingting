@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+  <!-- Basic Page Needs
+  –––––––––––––––––––––––––––––––––––––––––––––––––– -->
+  <meta charset="utf-8">
+  <title>Where Am I?</title>
+  <meta name="description" content="">
+  <meta name="author" content="">
+
+  <!-- Mobile Specific Metas
+  –––––––––––––––––––––––––––––––––––––––––––––––––– -->
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <!-- FONT
+  –––––––––––––––––––––––––––––––––––––––––––––––––– -->
+  <link href="//fonts.googleapis.com/css?family=Raleway:400,300,600" rel="stylesheet" type="text/css">
+
+  <!-- CSS
+  –––––––––––––––––––––––––––––––––––––––––––––––––– -->
+  <!-- <link rel="stylesheet" href="{{ url_for('static', filename='css/normalize.css') }}">
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/skeleton.css') }}">
+
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}"> -->
+  <!-- Favicon
+  –––––––––––––––––––––––––––––––––––––––––––––––––– -->
+  <!-- <link rel="icon" type="image/png" href="{{ url_for('static', filename='images/favicon.png') }}"> -->
+
+</head>
+
+<body>
+
+  <div class="section hero" style="margin-top: 40px">
+    <div class="container">
+      <div class="row">
+        <h1>Show a place on a map!</h1>
+      </div>
+    </div>
+  </div>
+  <div class="section">
+    <div class="container">
+      <div class="row">
+        <div class="eight columns">
+          {% include 'input.html' %}
+        </div>
+
+        <div class="four columns">
+            <h1>Welcome! Enter an address you want to search</h1>
+            <!-- <div id="search">
+                <form action="{{ url_for('get_amenity') }}" method="get">
+                    <div>
+                        <label for="address">Find an address or place</label>
+                    </div>
+                    <input type="text" name="address" id="address">
+                    <input type="submit" value="Submit">
+              </form> -->
+            </div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- End Document
+  –––––––––––––––––––––––––––––––––––––––––––––––––– -->
+</body>
+
+</html>
