@@ -49,7 +49,33 @@ def index():
     """Index page"""
     return render_template("index.html")
 
-# Report covid tests and request time
+# Basic information
+def get_basic_condition(lng, lat):
+    job_config_census = bigquery.QueryJobConfig(
+    query_parameters=[
+        bigquery.ScalarQueryParameter("lng", "FLOAT", lng),
+        bigquery.ScalarQueryParameter("lat", "FLOAT", lat),
+        ]
+    )
+    query_census = f"""
+         SELECT a.geo_id, total_pop, Round((white_pop/total_pop)*100, 2) as white_pop_pct, Round((black_pop/total_pop)*100, 2) as black_pop_pct, 
+         Round((asian_pop/total_pop)*100, 2) as asian_pop_pct, Round((hispanic_pop/total_pop)*100, 2) as hispanic_pop_pct, median_age, gini_index, 
+         Round((poverty/total_pop)*100, 2) as poverty_rate, median_income, internal_point_lat, internal_point_lon, internal_point_geo, tract_geom
+         FROM bigquery-public-data.census_bureau_acs.censustract_2018_5yr as a
+         LEFT JOIN
+         (SELECT geo_id, internal_point_lat, internal_point_lon, internal_point_geo, tract_geom 
+         FROM bigquery-public-data.geo_census_tracts.us_census_tracts_national) as b
+         ON a.geo_id = b.geo_id
+         WHERE ST_Intersects(tract_geom, ST_GeogPoint(@lng, @lat))
+    """
+    census_data = [dict(row) for row in bqclient.query(query_census, job_config=job_config_census).result()]
+
+    return census_data[0]
+
+
+
+
+# Get address and report information
 @app.route("/amenity/", methods=["GET"])
 def get_amenity():
     address = request.args.get("address")
@@ -68,32 +94,43 @@ def get_amenity():
     resp = requests.get(geocoding_call)
     lng, lat = resp.json()["features"][0]["center"]
 
-# Marketplace
+# Basic information
+    census_data = get_basic_condition(lng, lat)
+    white_pop_pct = census_data['white_pop_pct']
+    black_pop_pct = census_data['black_pop_pct']
+    asian_pop_pct = census_data['asian_pop_pct']
+    hispanic_pop_pct = census_data['hispanic_pop_pct']
+    gini_index = census_data['gini_index']
+    poverty_rate = census_data['poverty_rate']
+    median_age = census_data['median_age']
+
+# Amenity
+# Convenience
     job_config_market = bigquery.QueryJobConfig(
         query_parameters=[
-            bigquery.ScalarQueryParameter("poi_category", "STRING", "marketplace"),
+            bigquery.ScalarQueryParameter("poi_category", "STRING", "convenience"),
             bigquery.ScalarQueryParameter("lng", "FLOAT", lng),
             bigquery.ScalarQueryParameter("lat", "FLOAT", lat),
         ]
     )
     query_market = f"""
-        SELECT (select value from unnest(all_tags) WHERE key = 'name') as amenity_name,
-               (select value from unnest(all_tags) WHERE key = 'amenity') as amenity_type,
+        SELECT (select value from unnest(all_tags) WHERE key = 'name') as shop_name,
+               (select value from unnest(all_tags) WHERE key = 'shop') as shop_type,
                (select value from unnest(all_tags) WHERE key = 'addr:street') as address,
                (select value from unnest(all_tags) WHERE key = 'phone') as phone_number,
                CAST(round(ST_Distance(ST_GeogPoint(@lng, @lat), ST_Centroid(geometry))) AS int64) as distance_away_meters,
                ST_X(ST_Centroid(geometry)) as longitude,
                ST_Y(ST_Centroid(geometry)) as latitude
           FROM `bigquery-public-data.geo_openstreetmap.planet_features`
-         WHERE ('amenity', @poi_category) IN (SELECT (key, value) FROM UNNEST(all_tags))
+         WHERE ('shop', @poi_category) IN (SELECT (key, value) FROM UNNEST(all_tags))
          ORDER BY distance_away_meters ASC
          LIMIT 5
     """
 
     nearest_market = [dict(row) for row in bqclient.query(query_market, job_config=job_config_market).result()]
-    nearest_market1 = nearest_market[0]['amenity_name']
-    nearest_market2 = nearest_market[1]['amenity_name']
-    nearest_market3 = nearest_market[3]['amenity_name']
+    nearest_market1 = nearest_market[0]['shop_name']
+    nearest_market2 = nearest_market[1]['shop_name']
+    nearest_market3 = nearest_market[3]['shop_name']
     distance_market = nearest_market[0]['distance_away_meters']
 
     market1_lng = nearest_market[0]['longitude']
@@ -148,19 +185,64 @@ def get_amenity():
     fast_food4_lat = nearest_fast_food[3]['latitude']
     fast_food5_lat = nearest_fast_food[4]['latitude']
 
+# Supermarket
+    job_config_supermarket = bigquery.QueryJobConfig(
+        query_parameters=[
+            bigquery.ScalarQueryParameter("poi_category", "STRING", "supermarket"),
+            bigquery.ScalarQueryParameter("lng", "FLOAT", lng),
+            bigquery.ScalarQueryParameter("lat", "FLOAT", lat),
+        ]
+    )
+    query_supermarket = f"""
+        SELECT (select value from unnest(all_tags) WHERE key = 'name') as shop_name,
+               (select value from unnest(all_tags) WHERE key = 'shop') as shop_type,
+               (select value from unnest(all_tags) WHERE key = 'addr:street') as address,
+               (select value from unnest(all_tags) WHERE key = 'phone') as phone_number,
+               CAST(round(ST_Distance(ST_GeogPoint(@lng, @lat), ST_Centroid(geometry))) AS int64) as distance_away_meters,
+               ST_X(ST_Centroid(geometry)) as longitude,
+               ST_Y(ST_Centroid(geometry)) as latitude
+          FROM `bigquery-public-data.geo_openstreetmap.planet_features`
+         WHERE ('shop', @poi_category) IN (SELECT (key, value) FROM UNNEST(all_tags))
+         ORDER BY distance_away_meters ASC
+         LIMIT 5
+    """
 
-    return render_template(
-        "POI.html",
-        html_content= render_template(
-            "Content.html",
-            address=address,
-            curr_time=curr_time,
-            nearest_market1=nearest_market1,
-            nearest_market2=nearest_market2,
-            nearest_market3=nearest_market3,
-            distance_market=distance_market,
-        ),
-            html_map = render_template(
+    nearest_supermarket = [dict(row) for row in bqclient.query(query_supermarket, job_config=job_config_supermarket).result()]
+    nearest_supermarket1 = nearest_supermarket[0]['shop_name']
+    nearest_supermarket2 = nearest_supermarket[1]['shop_name']
+    nearest_supermarket3 = nearest_supermarket[3]['shop_name']
+    distance_supermarket = nearest_supermarket[0]['distance_away_meters']
+
+    supermarket1_lng = nearest_supermarket[0]['longitude']
+    supermarket2_lng = nearest_supermarket[1]['longitude']
+    supermarket3_lng = nearest_supermarket[2]['longitude']
+    supermarket4_lng = nearest_supermarket[3]['longitude']
+    supermarket5_lng = nearest_supermarket[4]['longitude']
+
+    supermarket1_lat = nearest_supermarket[0]['latitude']
+    supermarket2_lat = nearest_supermarket[1]['latitude']
+    supermarket3_lat = nearest_supermarket[2]['latitude']
+    supermarket4_lat = nearest_supermarket[3]['latitude']
+    supermarket5_lat = nearest_supermarket[4]['latitude']
+
+# Html
+    html_content= render_template(
+        "Content.html",
+        address=address,
+        curr_time=curr_time,
+        white_pop_pct = white_pop_pct,
+        black_pop_pct = black_pop_pct,
+        asian_pop_pct = asian_pop_pct,
+        hispanic_pop_pct = hispanic_pop_pct,
+        gini_index = gini_index,
+        poverty_rate = poverty_rate,
+        median_age = median_age,
+        nearest_market1=nearest_market1,
+        nearest_market2=nearest_market2,
+        nearest_market3=nearest_market3,
+        distance_market=distance_market)
+
+    html_map = render_template(
             "POI_map.html",
             mapbox_token=MAPBOX_TOKEN,
             center_lng= lng,
@@ -185,8 +267,26 @@ def get_amenity():
             fast_food3_lat = fast_food3_lat,
             fast_food4_lat = fast_food4_lat,
             fast_food5_lat = fast_food5_lat,
+            supermarket1_lng = supermarket1_lng,
+            supermarket2_lng = supermarket2_lng,
+            supermarket3_lng = supermarket3_lng,
+            supermarket4_lng = supermarket4_lng,
+            supermarket5_lng = supermarket5_lng,
+            supermarket1_lat = supermarket1_lat,
+            supermarket2_lat = supermarket2_lat,
+            supermarket3_lat = supermarket3_lat,
+            supermarket4_lat = supermarket4_lat,
+            supermarket5_lat = supermarket5_lat           
             )
+
+    return render_template(
+        "POI.html",
+        html_content= html_content,
+        html_map = html_map
         )
+
+# @app.route("/basic/", methods=["GET"])
+
 
 
 @app.route("/to_meyerson/")

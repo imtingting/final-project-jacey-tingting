@@ -10,12 +10,12 @@
 <body>
 
 <div class="panel-group" id="accordion">
-	<div class="panel panel-default">
+    <div class="panel panel-default">
 		<div class="panel-heading">
 			<h4 class="panel-title">
 				<a data-toggle="collapse" data-parent="#accordion" 
 				   href="#collapseOne">
-					Amenity
+					Basic Condition
 				</a>
 			</h4>
 		</div>
@@ -23,6 +23,45 @@
 			<div class="panel-body">
                 <h4>Address entered: {{address}}</h4>
                 <h4>Request time: {{curr_time}}</h4>
+                <p>
+                  In your address, there are:
+                </p>
+                <p>
+                    <ul>
+                        <li>Race
+                            <ul>
+                                <li>% White Population: {{white_pop_pct}} %</li>
+                                <li>% Black Population: {{black_pop_pct}} %</li>
+                                <li>% Asian Population: {{asian_pop_pct}} %</li>
+                                <li>% Hispanic Population: {{hispanic_pop_pct}} %</li>
+                              </ul>                       
+                        </li>
+                        <li>Age
+                          <ul>
+                            <li>Median Age: {{median_age}} </li>
+                          </ul>
+                        </li>
+                        <li>Economics
+                            <ul>
+                              <li>Gini Index: {{gini_index}} </li>
+                              <li>Poverty Rate: {{poverty_rate}} %</li>
+                            </ul>
+                        </li>
+                </p>
+			</div>
+		</div>
+	</div>
+	<div class="panel panel-default">
+		<div class="panel-heading">
+			<h4 class="panel-title">
+				<a data-toggle="collapse" data-parent="#accordion" 
+				   href="#collapseTwo">
+					Amenity
+				</a>
+			</h4>
+		</div>
+		<div id="collapseTwo" class="panel-collapse collapse in">
+			<div class="panel-body">
                 <p>
                   In your address, there are:
                 </p>
@@ -36,12 +75,12 @@
 		<div class="panel-heading">
 			<h4 class="panel-title">
 				<a data-toggle="collapse" data-parent="#accordion" 
-				   href="#collapseTwo">
+				   href="#collapseThree">
 					Public Transportation
 				</a>
 			</h4>
 		</div>
-		<div id="collapseTwo" class="panel-collapse collapse">
+		<div id="collapseThree" class="panel-collapse collapse">
 			<div class="panel-body">
 				Nihil anim keffiyeh helvetica, craft beer labore wes anderson 
 				cred nesciunt sapiente ea proident. Ad vegan excepteur butcher 
@@ -53,12 +92,12 @@
 		<div class="panel-heading">
 			<h4 class="panel-title">
 				<a data-toggle="collapse" data-parent="#accordion" 
-				   href="#collapseThree">
+				   href="#collapseFour">
 					Crime
 				</a>
 			</h4>
 		</div>
-		<div id="collapseThree" class="panel-collapse collapse">
+		<div id="collapseFour" class="panel-collapse collapse">
 			<div class="panel-body">
 				Nihil anim keffiyeh helvetica, craft beer labore wes anderson 
 				cred nesciunt sapiente ea proident. Ad vegan excepteur butcher 
