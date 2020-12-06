@@ -19,6 +19,7 @@ from cartoframes.viz import Layer, Map, color_category_style, popup_element
 from bokeh.plotting import figure
 from bokeh.embed import components
 from bokeh.resources import CSSResources, JSResources
+from shapely import wkt
 
 bokeh_css = CSSResources(mode="cdn", version="2.2.3", minified=True)
 bokeh_js = JSResources(mode="cdn", version="2.2.3", minified=True)
@@ -72,7 +73,31 @@ def get_basic_condition(lng, lat):
 
     return census_data[0]
 
-
+# Get the census tracts that within 2000 meters
+def get_geo_tract(lng, lat):
+    job_config_tract = bigquery.QueryJobConfig(
+    query_parameters=[
+        bigquery.ScalarQueryParameter("lng", "FLOAT", lng),
+        bigquery.ScalarQueryParameter("lat", "FLOAT", lat),
+        ]
+    )
+    query_geo_tract = f"""
+         SELECT a.geo_id, total_pop, Round((white_pop/total_pop)*100, 2) as white_pop_pct, Round((black_pop/total_pop)*100, 2) as black_pop_pct, 
+         Round((asian_pop/total_pop)*100, 2) as asian_pop_pct, Round((hispanic_pop/total_pop)*100, 2) as hispanic_pop_pct, median_age, gini_index, 
+         Round((poverty/total_pop)*100, 2) as poverty_rate, median_income, 
+         tract_geom,
+         ST_Distance(ST_GeogPoint(@lng, @lat), internal_point_geo) as distance_away_meters,
+         FROM bigquery-public-data.census_bureau_acs.censustract_2018_5yr as a
+         LEFT JOIN
+         (SELECT geo_id, internal_point_lat, internal_point_lon, internal_point_geo, tract_geom 
+         FROM bigquery-public-data.geo_census_tracts.us_census_tracts_national) as b
+         ON a.geo_id = b.geo_id
+         WHERE ST_Distance(ST_GeogPoint(@lng, @lat), internal_point_geo) < 2000
+    """
+    df = bqclient.query(query_geo_tract, job_config=job_config_tract).to_dataframe()
+    df['tract_geom'] = df['tract_geom'].apply(wkt.loads)
+    gdf = gpd.GeoDataFrame(df, geometry='tract_geom')
+    return gdf
 
 
 # Get address and report information
@@ -103,6 +128,11 @@ def get_amenity():
     gini_index = census_data['gini_index']
     poverty_rate = census_data['poverty_rate']
     median_age = census_data['median_age']
+
+# Basic map
+    tract_gdf = get_geo_tract(lng, lat)
+
+
 
 # Amenity
 # Convenience
@@ -226,6 +256,7 @@ def get_amenity():
     supermarket5_lat = nearest_supermarket[4]['latitude']
 
 # Html
+# Html_content
     html_content= render_template(
         "Content.html",
         address=address,
@@ -242,7 +273,8 @@ def get_amenity():
         nearest_market3=nearest_market3,
         distance_market=distance_market)
 
-    html_map = render_template(
+# Html_map_poi
+    html_map_poi = render_template(
             "POI_map.html",
             mapbox_token=MAPBOX_TOKEN,
             center_lng= lng,
@@ -279,10 +311,22 @@ def get_amenity():
             supermarket5_lat = supermarket5_lat           
             )
 
+# Basic condition map
+    html_map_basic = render_template(
+        "basic_map.html",
+        geojson_tract=tract_gdf.to_json(),
+        center_lng=lng,
+        center_lat=lat,
+        mapbox_token=MAPBOX_TOKEN,
+    )
+
+
+
+
     return render_template(
         "POI.html",
         html_content= html_content,
-        html_map = html_map
+        html_map_poi = html_map_poi
         )
 
 # @app.route("/basic/", methods=["GET"])
