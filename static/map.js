@@ -1,25 +1,3 @@
-<!DOCTYPE html>
-<html>
-<head>
-<meta charset="utf-8" />
-<title>Filter symbols by toggling a list</title>
-<meta name="viewport" content="initial-scale=1,maximum-scale=1,user-scalable=no" />
-<script src="https://api.mapbox.com/mapbox-gl-js/v1.12.0/mapbox-gl.js"></script>
-
-
-<link href="https://api.mapbox.com/mapbox-gl-js/v1.12.0/mapbox-gl.css" rel="stylesheet" />
-<link href="/static/css/map.css" rel="stylesheet" />
-
-<!-- <style>
-	body { margin: 0; padding: 0; }
-	#map { position: absolute; top: 0; bottom: 0; width: 100%; }
-</style> -->
-
-<div id="map"></div>
-<nav id="filter-group" class="filter-group"></nav>
-
-<script>
-
 	// TO MAKE THE MAP APPEAR YOU MUST
 	// ADD YOUR ACCESS TOKEN FROM
 	// https://account.mapbox.com
@@ -249,7 +227,34 @@
                 });
             }
         });
-
+        // // Add a marker to the input address
+        // map.loadImage(
+        //     'https://docs.mapbox.com/mapbox-gl-js/assets/custom_marker.png',
+        //     // Add an image to use as a custom marker
+        //     function (error, image) {
+        //         if (error) throw error;
+        //         map.addImage('custom-marker', image);
+        //         map.addSource('point', {
+        //             'type': 'geojson',
+        //             'data': {
+        //                 'type': 'FeatureCollection',
+        //                 'features': [
+        //                     {'type': 'Feature',
+        //                     'geometry': {
+        //                         'type': 'Point',
+        //                         'coordinates': [{{ center_lng }}, {{ center_lat }}]
+        //                         }
+        //                         }]
+        //                         }});
+        //         map.addLayer({
+        //             'id': 'places',
+        //             'type': 'symbol',
+        //             'source': 'places',
+        //             'layout': {
+        //                 'icon-image': 'custom-marker',
+        //                 'icon-allow-overlap': true
+        //                 }}
+        //                 )});
         // Create a popup, but don't add it to the map yet.
         var popup = new mapboxgl.Popup({
             closeButton: false,
@@ -290,9 +295,3 @@
 
         })
     });
-
-
-</script>
-
-</body>
-</html>
