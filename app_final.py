@@ -160,8 +160,10 @@ def get_amenity():
     nearest_market = [dict(row) for row in bqclient.query(query_market, job_config=job_config_market).result()]
     nearest_market1 = nearest_market[0]['shop_name']
     nearest_market2 = nearest_market[1]['shop_name']
-    nearest_market3 = nearest_market[3]['shop_name']
-    distance_market = nearest_market[0]['distance_away_meters']
+    nearest_market3 = nearest_market[2]['shop_name']
+    distance_market1 = nearest_market[0]['distance_away_meters']
+    distance_market2 = nearest_market[1]['distance_away_meters']
+    distance_market3 = nearest_market[2]['distance_away_meters']
 
     market1_lng = nearest_market[0]['longitude']
     market2_lng = nearest_market[1]['longitude']
@@ -268,10 +270,12 @@ def get_amenity():
         gini_index = gini_index,
         poverty_rate = poverty_rate,
         median_age = median_age,
-        nearest_market1=nearest_market1,
-        nearest_market2=nearest_market2,
-        nearest_market3=nearest_market3,
-        distance_market=distance_market)
+        nearest_market1 = nearest_market1,
+        nearest_market2 = nearest_market2,
+        nearest_market3 = nearest_market3,
+        distance_market1 = distance_market1,
+        distance_market2 = distance_market2,
+        distance_market3 =distance_market3)
 
 # Html_map_poi
     html_map_poi = render_template(
@@ -319,8 +323,6 @@ def get_amenity():
         center_lat=lat,
         mapbox_token=MAPBOX_TOKEN,
     )
-
-
 
 
     return render_template(
