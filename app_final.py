@@ -202,8 +202,10 @@ def get_amenity():
     nearest_fast_food = [dict(row) for row in bqclient.query(query_fast_food, job_config=job_config_fast_food).result()]
     nearest_fast_food1 = nearest_fast_food[0]['amenity_name']
     nearest_fast_food2 = nearest_fast_food[1]['amenity_name']
-    nearest_fast_food3 = nearest_fast_food[3]['amenity_name']
-    distance_fast_food = nearest_fast_food[0]['distance_away_meters']
+    nearest_fast_food3 = nearest_fast_food[2]['amenity_name']
+    distance_fast_food1 = nearest_fast_food[0]['distance_away_meters']
+    distance_fast_food2 = nearest_fast_food[1]['distance_away_meters']
+    distance_fast_food3 = nearest_fast_food[2]['distance_away_meters']
 
     fast_food1_lng = nearest_fast_food[0]['longitude']
     fast_food2_lng = nearest_fast_food[1]['longitude']
@@ -242,8 +244,10 @@ def get_amenity():
     nearest_supermarket = [dict(row) for row in bqclient.query(query_supermarket, job_config=job_config_supermarket).result()]
     nearest_supermarket1 = nearest_supermarket[0]['shop_name']
     nearest_supermarket2 = nearest_supermarket[1]['shop_name']
-    nearest_supermarket3 = nearest_supermarket[3]['shop_name']
-    distance_supermarket = nearest_supermarket[0]['distance_away_meters']
+    nearest_supermarket3 = nearest_supermarket[2]['shop_name']
+    distance_supermarket1 = nearest_supermarket[0]['distance_away_meters']
+    distance_supermarket2 = nearest_supermarket[1]['distance_away_meters']
+    distance_supermarket3 = nearest_supermarket[2]['distance_away_meters']
 
     supermarket1_lng = nearest_supermarket[0]['longitude']
     supermarket2_lng = nearest_supermarket[1]['longitude']
@@ -275,7 +279,20 @@ def get_amenity():
         nearest_market3 = nearest_market3,
         distance_market1 = distance_market1,
         distance_market2 = distance_market2,
-        distance_market3 =distance_market3)
+        distance_market3 =distance_market3,
+        nearest_fast_food1 = nearest_fast_food1,
+        nearest_fast_food2 = nearest_fast_food2,
+        nearest_fast_food3 = nearest_fast_food3,
+        distance_fast_food1 = distance_fast_food1,
+        distance_fast_food2 = distance_fast_food2,
+        distance_fast_food3 =distance_fast_food3,
+        nearest_supermarket1 = nearest_supermarket1,
+        nearest_supermarket2 = nearest_supermarket2,
+        nearest_supermarket3 = nearest_supermarket3,
+        distance_supermarket1 = distance_supermarket1,
+        distance_supermarket2 = distance_supermarket2,
+        distance_supermarket3 =distance_supermarket3
+        )
 
 # Html_map_poi
     html_map_poi = render_template(
