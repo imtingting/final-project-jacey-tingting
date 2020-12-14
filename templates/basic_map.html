@@ -82,9 +82,13 @@
     var zoomThreshold = 4;
 
     map.on('load', function () {
-        map.addSource('population', {
-            'type': 'vector',
-            'url': 'mapbox://mapbox.660ui7x6'
+        // map.addSource('population', {
+        //     'type': 'vector',
+        //     'url': 'mapbox://mapbox.660ui7x6'
+        // });
+        map.addSource('route', {
+            'type': 'geojson',
+            'data': geojson_tract
         });
 
         map.addLayer(

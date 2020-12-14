@@ -1,70 +1,82 @@
 <!DOCTYPE html>
-<html lang="en">
-
+<html lang="">
 <head>
-
-  <!-- Basic Page Needs
-  –––––––––––––––––––––––––––––––––––––––––––––––––– -->
-  <meta charset="utf-8">
-  <title>Amenity</title>
-  <meta name="description" content="">
-  <meta name="author" content="">
-
-  <!-- Mobile Specific Metas
-  –––––––––––––––––––––––––––––––––––––––––––––––––– -->
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-
-  <!-- FONT
-  –––––––––––––––––––––––––––––––––––––––––––––––––– -->
-  <link href="//fonts.googleapis.com/css?family=Raleway:400,300,600" rel="stylesheet" type="text/css">
-
-  <!-- CSS
-  –––––––––––––––––––––––––––––––––––––––––––––––––– -->
-  <link rel="stylesheet" href="{{ url_for('static', filename='css/normalize.css') }}">
-  <link rel="stylesheet" href="{{ url_for('static', filename='css/skeleton.css') }}">
-
-  <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
-  <!-- Favicon
-  –––––––––––––––––––––––––––––––––––––––––––––––––– -->
-  <!-- <link rel="icon" type="image/png" href="{{ url_for('static', filename='images/favicon.png') }}"> -->
-
+<title>Find A Liveable Place</title>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<link href="layout/styles/layout.css" rel="stylesheet" type="text/css" media="all">
 </head>
-
-<body>
-
-  <div class="section hero" style="margin-top: 40px">
-    <div class="container">
-      <div class="row">
-        <h1>Welcome! Enter an address you want to search</h1>
+<body id="top">
+<!-- ################################################################################################ -->
+<!-- ################################################################################################ -->
+<!-- ################################################################################################ -->
+<!-- Top Background Image Wrapper -->
+<div class="bgded overlay" style="background-image:url('images/demo/backgrounds/Philadelphia.jpg');"> 
+  <!-- ################################################################################################ -->
+  <div class="wrapper row1">
+    <header id="header" class="hoc clear"> 
+      <!-- ################################################################################################ -->
+      <div id="logo" class="fl_left">
+        <h1><a href="index.html">Yeinydd</a></h1>
       </div>
-    </div>
+      <!-- ################################################################################################ -->
+      <!-- <nav id="mainav" class="fl_right">
+        <ul class="clear">
+          <li class="active"><a href="index.html">Home</a></li>
+          <li><a class="drop" href="#">Pages</a>
+            <ul>
+              <li><a href="pages/gallery.html">Gallery</a></li>
+              <li><a href="pages/full-width.html">Full Width</a></li>
+              <li><a href="pages/sidebar-left.html">Sidebar Left</a></li>
+              <li><a href="pages/sidebar-right.html">Sidebar Right</a></li>
+              <li><a href="pages/basic-grid.html">Basic Grid</a></li>
+              <li><a href="pages/font-icons.html">Font Icons</a></li>
+            </ul>
+          </li>
+          <li><a class="drop" href="#">Dropdown</a>
+            <ul>
+              <li><a href="#">Level 2</a></li>
+              <li><a class="drop" href="#">Level 2 + Drop</a>
+                <ul>
+                  <li><a href="#">Level 3</a></li>
+                  <li><a href="#">Level 3</a></li>
+                  <li><a href="#">Level 3</a></li>
+                </ul>
+              </li>
+              <li><a href="#">Level 2</a></li>
+            </ul>
+          </li>
+          <li><a href="#">Link Text</a></li>
+          <li><a href="#">Link Text</a></li>
+          <li><a href="#">Link Text</a></li>
+          <li><a href="#">Long Link Text</a></li>
+        </ul>
+      </nav> -->
+      <!-- ################################################################################################ -->
+    </header>
   </div>
-  <div class="section">
-    <div class="container">
-      <div class="row">
-        <div class="eight columns">
-          {% include 'input.html' %}
-        </div>
-
-        <div class="four columns">
-            <h1></h1>
-            <!-- <div id="search">
-                <form action="{{ url_for('get_info') }}" method="get">
-                    <div>
-                        <label for="address">Find an address or place</label>
-                    </div>
-                    <input type="text" name="address" id="address">
-                    <input type="submit" value="Submit">
-              </form> -->
-            </div>
-        </div>
-      </div>
-    </div>
-
+  <!-- ################################################################################################ -->
+  <!-- ################################################################################################ -->
+  <!-- ################################################################################################ -->
+  <div id="pageintro" class="hoc clear"> 
+    <!-- ################################################################################################ -->
+    <article>
+      <h3 class="heading">Gravida ligula pulvinar</h3>
+      <p>Find an address or place.</p>
+      <footer>
+        <form class="group" action="{{ url_for('get_info') }}" method="get">
+          <fieldset>
+            <legend>Sign-Up:</legend>
+            <input type="text" name="address" id="address" placeholder="Find an address&hellip;">
+            <!-- <input type="submit" value="Search"> -->
+            <button class="fas fa-sign-in-alt" type="submit" title="Submit"><em>Submit</em></button>
+          </fieldset>
+        </form>
+      </footer>
+    </article>
+    <!-- ################################################################################################ -->
   </div>
-
-  <!-- End Document
-  –––––––––––––––––––––––––––––––––––––––––––––––––– -->
+  <!-- ################################################################################################ -->
+</div>
 </body>
-
 </html>
