@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-	<meta charset="utf-8"> 
+	<meta charset="utf-8">
 	<title>collapsibles</title>
 	<link rel="stylesheet" href="https://cdn.staticfile.org/twitter-bootstrap/3.3.7/css/bootstrap.min.css">
 	<script src="https://cdn.staticfile.org/jquery/2.1.1/jquery.min.js"></script>
@@ -13,7 +13,7 @@
     <div class="panel panel-default">
 		<div class="panel-heading">
 			<h4 class="panel-title">
-				<a data-toggle="collapse" data-parent="#accordion" 
+				<a data-toggle="collapse" data-parent="#accordion"
 				   href="#collapseOne">
 					Basic Condition
 				</a>
@@ -27,11 +27,11 @@
                     <ul>
                         <li>Race
                             <ul>
-                                <li>% White Population: {{white_pop_pct}} %</li>
-                                <li>% Black Population: {{black_pop_pct}} %</li>
-                                <li>% Asian Population: {{asian_pop_pct}} %</li>
-                                <li>% Hispanic Population: {{hispanic_pop_pct}} %</li>
-                              </ul>                       
+                                <li> White Population: {{white_pop_pct}} %</li>
+                                <li> Black Population: {{black_pop_pct}} %</li>
+                                <li> Asian Population: {{asian_pop_pct}} %</li>
+                                <li> Hispanic Population: {{hispanic_pop_pct}} %</li>
+                              </ul>
                         </li>
                         <li>Age
                           <ul>
@@ -51,7 +51,7 @@
 	<div class="panel panel-default">
 		<div class="panel-heading">
 			<h4 class="panel-title">
-				<a data-toggle="collapse" data-parent="#accordion" 
+				<a data-toggle="collapse" data-parent="#accordion"
 				   href="#collapseTwo">
 					Amenity
 				</a>
@@ -66,7 +66,7 @@
                                 <li>{{nearest_supermarket1}} : {{distance_supermarket1}} m</li>
                                 <li>{{nearest_supermarket2}} : {{distance_supermarket2}} m</li>
                                 <li>{{nearest_supermarket3}} : {{distance_supermarket3}} m</li>
-                              </ul>                       
+                              </ul>
                         </li>
                         <li>Convenience
                           <ul>
@@ -75,7 +75,7 @@
 							<li>{{nearest_market3}} : {{distance_market3}} m</li>
                           </ul>
                         </li>
-                        <li>Fast-food 
+                        <li>Fast-food
                             <ul>
 							<li>{{nearest_fast_food1}} : {{distance_fast_food1}} m</li>
 							<li>{{nearest_fast_food2}} : {{distance_fast_food2}} m</li>
@@ -89,7 +89,7 @@
 	<div class="panel panel-default">
 		<div class="panel-heading">
 			<h4 class="panel-title">
-				<a data-toggle="collapse" data-parent="#accordion" 
+				<a data-toggle="collapse" data-parent="#accordion"
 				   href="#collapseThree">
 					Public Transportation
 				</a>
@@ -97,14 +97,31 @@
 		</div>
 		<div id="collapseThree" class="panel-collapse collapse">
 			<div class="panel-body">
-				lalalalallalla
+								<p>
+										<ul>
+												<li>Bus or trolley stops
+														<ul>
+																<li>{{bus_stop1}} : {{distance_bus1}} m</li>
+																<li>{{bus_stop2}} : {{distance_bus2}} m</li>
+																<li>{{bus_stop3}} : {{distance_bus3}} m</li>
+																<li>{{bus_stop4}} : {{distance_bus4}} m</li>
+																<li>{{bus_stop5}} : {{distance_bus5}} m</li>
+															</ul>
+												</li>
+												<li>Rail Stations
+													<ul>
+							                  <li>{{rail_stop1}} : {{distance_rail1}} m</li>
+						                   	<li>{{rail_stop2}} : {{distance_rail2}} m</li>
+													</ul>
+												</li>
+								</p>
 			</div>
 		</div>
 	</div>
 	<div class="panel panel-default">
 		<div class="panel-heading">
 			<h4 class="panel-title">
-				<a data-toggle="collapse" data-parent="#accordion" 
+				<a data-toggle="collapse" data-parent="#accordion"
 				   href="#collapseFour">
 					Crime
 				</a>

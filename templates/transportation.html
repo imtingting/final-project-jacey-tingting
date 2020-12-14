@@ -1,0 +1,258 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset='utf-8' />
+  <title>Get started with the Isochrone API</title>
+  <meta name='viewport' content='initial-scale=1,maximum-scale=1,user-scalable=no' />
+  <!-- Import Mapbox GL JS  -->
+  <script src='https://api.tiles.mapbox.com/mapbox-gl-js/v2.0.0/mapbox-gl.js'></script>
+  <link href='https://api.tiles.mapbox.com/mapbox-gl-js/v2.0.0/mapbox-gl.css' rel='stylesheet' />
+  <!-- Import Assembly -->
+  <link href='https://api.mapbox.com/mapbox-assembly/v0.23.2/assembly.min.css' rel='stylesheet'>
+  <script src='https://api.mapbox.com/mapbox-assembly/v0.23.2/assembly.js'> </script>
+  <!-- Import jQuery -->
+  <script src='https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js'></script>
+
+  <style>
+    body {
+      margin: 0;
+      padding: 0;
+    }
+
+    #map {
+      position: absolute;
+      top: 0;
+      bottom: 0;
+      width: 100%;
+    }
+  </style>
+</head>
+
+<body>
+  <!-- Create a container for the map -->
+  <div id='map'></div>
+
+  <!-- Create a sidebar with buttons for each option -->
+  <div class='absolute fl my24 mx24 py24 px24 bg-gray-faint round'>
+    <form id='params'>
+      <h4 class='txt-m txt-bold mb6'>Choose a travel mode:</h4>
+      <div class='mb12 mr12 toggle-group align-center'>
+        <label class='toggle-container'>
+          <input name='profile' type='radio' value='walking'>
+          <div class='toggle toggle--active-null toggle--null'>Walking</div>
+        </label>
+        <label class='toggle-container'>
+          <input name='profile' type='radio' value='cycling' checked>
+          <div class='toggle toggle--active-null toggle--null'>Cycling</div>
+        </label>
+        <label class='toggle-container'>
+          <input name='profile' type='radio' value='driving'>
+          <div class='toggle toggle--active-null toggle--null'>Driving</div>
+        </label>
+      </div>
+      <h4 class='txt-m txt-bold mb6'>Choose a maximum duration:</h4>
+      <div class='mb12 mr12 toggle-group align-center'>
+        <label class='toggle-container'>
+          <input name='duration' type='radio' value='10' checked>
+          <div class='toggle toggle--active-null toggle--null'>10 min</div>
+        </label>
+        <label class='toggle-container'>
+          <input name='duration' type='radio' value='20'>
+          <div class='toggle toggle--active-null toggle--null'>20 min</div>
+        </label>
+        <label class='toggle-container'>
+          <input name='duration' type='radio' value='30'>
+          <div class='toggle toggle--active-null toggle--null'>30 min</div>
+        </label>
+    </form>
+  </div>
+
+  <script>
+    // Add your Mapbox access token
+    mapboxgl.accessToken = 'pk.eyJ1IjoiamFjZXljIiwiYSI6ImNrZzJiNjQxMDA2aWUyem54a3phd2s0d3QifQ.mtLp6I-_UWWhgrhPRAmb8A';
+    var map = new mapboxgl.Map({
+      container: 'map', // Specify the container ID
+      style: 'mapbox://styles/mapbox/streets-v11', // Specify which map style to use
+      center: [{{center_lng}}, {{center_lat}}], // Specify the starting position
+      zoom: 15, // Specify the starting zoom
+    });
+
+    // Create variables to use in getIso()
+    var urlBase = 'https://api.mapbox.com/isochrone/v1/mapbox/';
+    var lon = {{center_lng}};
+    var lat = {{center_lat}};
+    var profile = 'cycling';
+    var minutes = 10;
+
+    // Create a function that sets up the Isochrone API query then makes an Ajax call
+    function getIso() {
+      var query = urlBase + profile + '/' + lon + ',' + lat + '?contours_minutes=' + minutes + '&polygons=true&access_token=' + mapboxgl.accessToken;
+
+      $.ajax({
+        method: 'GET',
+        url: query
+      }).done(function(data) {
+        // Set the 'iso' source's data to what's returned by the API query
+        map.getSource('iso').setData(data);
+      })
+    };
+
+    var marker = new mapboxgl.Marker({
+      'color': '#314ccd'
+    });
+
+    // Create a LngLat object to use in the marker initialization
+    // https://docs.mapbox.com/mapbox-gl-js/api/#lnglat
+    var lngLat = {
+      lon: lon,
+      lat: lat
+    };
+
+    map.on('load', function() {
+      // When the map loads, add the source and layer
+      map.addSource('iso', {
+        type: 'geojson',
+        data: {
+          "type": 'FeatureCollection',
+          "features": []
+        }
+      });
+
+      map.addLayer({
+        'id': 'isoLayer',
+        'type': 'fill',
+        // Use "iso" as the data source for this layer
+        'source': 'iso',
+        'layout': {},
+        'paint': {
+          // The fill color for the layer is set to a light purple
+          'fill-color': '#5a3fc0',
+          'fill-opacity': 0.3
+        }
+      }, "poi-label");
+
+      // Initialize the marker at the query coordinates
+      marker.setLngLat(lngLat).addTo(map);
+
+      // Make the API call
+      getIso();
+
+// 'https://upload.wikimedia.org/wikipedia/commons/7/7c/201408_cat.png'
+      //try add point
+      map.loadImage(
+        '{{ url_for('static', filename='css/bus_icon.png') }}',
+          function (error, image) {
+            if (error) throw error;
+            map.addImage('bus', image);
+            map.addSource('point', {
+              'type': 'geojson',
+              'data': {
+                'type': 'FeatureCollection',
+                'features': [
+                  {
+                    'type': 'Feature',
+                    'geometry': {
+                      'type': 'Point',
+                      'coordinates': [{{bus1_lng}}, {{bus1_lat}}]
+                    }
+                  },
+                  {
+                    'type': 'Feature',
+                    'geometry': {
+                      'type': 'Point',
+                      'coordinates': [{{bus2_lng}}, {{bus2_lat}}]
+                    }
+                  },
+                  {
+                    'type': 'Feature',
+                    'geometry': {
+                      'type': 'Point',
+                      'coordinates': [{{bus3_lng}}, {{bus3_lat}}]
+                    }
+                  },
+                  {
+                    'type': 'Feature',
+                    'geometry': {
+                      'type': 'Point',
+                      'coordinates': [{{bus4_lng}}, {{bus4_lat}}]
+                    }
+                  },
+                  {
+                    'type': 'Feature',
+                    'geometry': {
+                      'type': 'Point',
+                      'coordinates': [{{bus5_lng}}, {{bus5_lat}}]
+                    }
+                  }
+                ]
+              }
+            });
+            map.addLayer({
+              'id': 'points',
+              'type': 'symbol',
+              'source': 'point',
+              'layout': {
+                'icon-image': 'bus',
+                'icon-size': 1
+              }
+            });
+          }
+        );
+      map.loadImage(
+        '{{ url_for('static', filename='css/rail_icon.png') }}',
+          function (error, image) {
+            if (error) throw error;
+            map.addImage('rail', image);
+            map.addSource('point2', {
+              'type': 'geojson',
+              'data': {
+                'type': 'FeatureCollection',
+                'features': [
+                  {
+                    'type': 'Feature',
+                    'geometry': {
+                      'type': 'Point',
+                      'coordinates': [{{rail1_lng}}, {{rail1_lat}}]
+                    }
+                  },
+                  {
+                    'type': 'Feature',
+                    'geometry': {
+                      'type': 'Point',
+                      'coordinates': [{{rail2_lng}}, {{rail2_lat}}]
+                    }
+                  }
+                ]
+              }
+            });
+            map.addLayer({
+              'id': 'points2',
+              'type': 'symbol',
+              'source': 'point2',
+              'layout': {
+                'icon-image': 'rail',
+                'icon-size': 1
+              }
+            });
+          }
+        );
+    });
+
+    // Target the "params" form in the HTML portion of your code
+    var params = document.getElementById('params');
+
+    // When a user changes the value of profile or duration by clicking a button, change the parameter's value and make the API query again
+    params.addEventListener('change', function(e) {
+      if (e.target.name === 'profile') {
+        profile = e.target.value;
+        getIso();
+      } else if (e.target.name === 'duration') {
+        minutes = e.target.value;
+        getIso();
+      }
+    });
+  </script>
+</body>
+
+</html>

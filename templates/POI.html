@@ -23,7 +23,7 @@
   <link rel="stylesheet" href="{{ url_for('static', filename='css/normalize.css') }}">
   <link rel="stylesheet" href="{{ url_for('static', filename='css/skeleton.css') }}">
 
-  <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+  <!-- <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}"> -->
   <!-- Favicon
   –––––––––––––––––––––––––––––––––––––––––––––––––– -->
   <!-- <link rel="icon" type="image/png" href="{{ url_for('static', filename='images/favicon.png') }}"> -->
@@ -33,14 +33,22 @@
 
     <div id="header" style="background-color:a8dadc;">
         <h1 style="margin-bottom:0;">Amenities around the address</h1></div>
-
     <div id="report" style="background-color:f1faee;height:690px;width:500px;float:left;">
         {% include 'input.html' %}
-        <br>
-        <br>
         {{ html_content | safe }}
     </div>
+    <div id="poi-map" style="background-color:f1faee;height:800px;width:700px;float:right;">
+        <br>
+        <br>
+        {{ html_map_poi | safe }}
+    </div>
+    <div id="transportation-map" style="background-color:f1faee;height:800px;width:700px;float:right;">
+        {{ html_transportation | safe }}
+    </div>
 </div>
-{{ html_map_poi | safe }}
+
+<!-- <div id="trasportation">
+  {{html_transportation | safe }}
+</div> -->
 
 </html>
