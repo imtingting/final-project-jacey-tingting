@@ -4,69 +4,26 @@
 <title>Find A Liveable Place</title>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-<link href="layout/styles/layout.css" rel="stylesheet" type="text/css" media="all">
+<!-- <link href="layout/styles/layout.css" rel="stylesheet" type="text/css" media="all"> -->
+<link rel="stylesheet" href="{{ url_for('static', filename='layout/styles/layout.css') }}">
 </head>
 <body id="top">
-<!-- ################################################################################################ -->
-<!-- ################################################################################################ -->
-<!-- ################################################################################################ -->
 <!-- Top Background Image Wrapper -->
-<div class="bgded overlay" style="background-image:url('images/demo/backgrounds/Philadelphia.jpg');"> 
-  <!-- ################################################################################################ -->
-  <div class="wrapper row1">
-    <header id="header" class="hoc clear"> 
-      <!-- ################################################################################################ -->
-      <div id="logo" class="fl_left">
-        <h1><a href="index.html">Yeinydd</a></h1>
-      </div>
-      <!-- ################################################################################################ -->
-      <!-- <nav id="mainav" class="fl_right">
-        <ul class="clear">
-          <li class="active"><a href="index.html">Home</a></li>
-          <li><a class="drop" href="#">Pages</a>
-            <ul>
-              <li><a href="pages/gallery.html">Gallery</a></li>
-              <li><a href="pages/full-width.html">Full Width</a></li>
-              <li><a href="pages/sidebar-left.html">Sidebar Left</a></li>
-              <li><a href="pages/sidebar-right.html">Sidebar Right</a></li>
-              <li><a href="pages/basic-grid.html">Basic Grid</a></li>
-              <li><a href="pages/font-icons.html">Font Icons</a></li>
-            </ul>
-          </li>
-          <li><a class="drop" href="#">Dropdown</a>
-            <ul>
-              <li><a href="#">Level 2</a></li>
-              <li><a class="drop" href="#">Level 2 + Drop</a>
-                <ul>
-                  <li><a href="#">Level 3</a></li>
-                  <li><a href="#">Level 3</a></li>
-                  <li><a href="#">Level 3</a></li>
-                </ul>
-              </li>
-              <li><a href="#">Level 2</a></li>
-            </ul>
-          </li>
-          <li><a href="#">Link Text</a></li>
-          <li><a href="#">Link Text</a></li>
-          <li><a href="#">Link Text</a></li>
-          <li><a href="#">Long Link Text</a></li>
-        </ul>
-      </nav> -->
-      <!-- ################################################################################################ -->
-    </header>
-  </div>
-  <!-- ################################################################################################ -->
-  <!-- ################################################################################################ -->
-  <!-- ################################################################################################ -->
+<div class="bgded overlay" style="background-image:url('static/images/demo/backgrounds/Philadelphia.jpg');"> 
   <div id="pageintro" class="hoc clear"> 
-    <!-- ################################################################################################ -->
     <article>
-      <h3 class="heading">Gravida ligula pulvinar</h3>
-      <p>Find an address or place.</p>
+      <!-- <h3 class="heading">Welcome!</h3> -->
+      <!-- <p >Are you looking for a location to live in Philadelphia, try puting an address below, we will tell you the surrounding environment of the location.</p>
+      <p>You may want to search:</p> -->
+      <!-- <ul>
+        <li>Center City: 210 W Rittenhouse Square, Philadelphia</li>
+        <li>University City: 3900 Chestnut Street, Philadelphia</li>
+        <li>North Philadelphia: 1801 N Broad St, Philadelphia</li>
+      </ul> -->
       <footer>
-        <form class="group" action="{{ url_for('get_amenity') }}" method="get">
+        <form class="group" action="{{ url_for('get_info') }}" method="get">
           <fieldset>
-            <legend>Sign-Up:</legend>
+            <legend>Address</legend>
             <input type="text" name="address" id="address" placeholder="Find an address&hellip;">
             <!-- <input type="submit" value="Search"> -->
             <button class="fas fa-sign-in-alt" type="submit" title="Submit"><em>Submit</em></button>
@@ -74,50 +31,60 @@
         </form>
       </footer>
     </article>
-    <!-- ################################################################################################ -->
   </div>
-  <!-- ################################################################################################ -->
+</div>
 </div>
 <!-- End Top Background Image Wrapper -->
-<!-- ################################################################################################ -->
-<!-- ################################################################################################ -->
-<!-- ################################################################################################ -->
 <div class="wrapper row3">
   <main class="hoc container clear"> 
     <!-- main body -->
-    <!-- ################################################################################################ -->
     <section id="introblocks">
       <div class="sectiontitle">
-        <h6 class="heading">Quisque adipiscing</h6>
-        <p>Urna sed augue class aptent taciti sociosqu ad litora torquent</p>
+        <h3 class="heading">Basic Information</h3>
+        <br>
+        <br>
+        <h4>In {{address}}</h4>
       </div>
       <ul class="nospace group">
         <li class="one_quarter first">
-          <article><a href="#"><i class="fas fa-golf-ball"></i></a>
-            <h6 class="heading">Suspendisse</h6>
-            <p>Per conubia nostra per mauris aliquet massa nulla facilisi porta ligula non elementum</p>
-            <footer><a class="btn" href="#">More Details</a></footer>
+          <article><a href="#"><i class="fas fa-users"></i></a>
+            <h6 class="heading">Race</h6>
+            <p>
+              <ul>
+                <li> White Population: {{white_pop_pct}} %</li>
+                <li> Black Population: {{black_pop_pct}} %</li>
+                <li> Asian Population: {{asian_pop_pct}} %</li>
+                <li> Hispanic Population: {{hispanic_pop_pct}} %</li>
+              </ul>
+            </p>
           </article>
         </li>
         <li class="one_quarter">
-          <article><a href="#"><i class="fas fa-ribbon"></i></a>
-            <h6 class="heading">Inceptos</h6>
-            <p>Ultricies justo urna egestas metus ut ornare leo augue pharetra risus morbi tincidunt massa</p>
-            <footer><a class="btn" href="#">More Details</a></footer>
+          <article><a href="#"><i class="fas fa-child"></i></a>
+            <h6 class="heading">Age</h6>
+            <p>Median Age: {{median_age}}</p>
           </article>
         </li>
         <li class="one_quarter">
-          <article><a href="#"><i class="fas fa-tablets"></i></a>
-            <h6 class="heading">Himenaeos</h6>
-            <p>Ac vestibulum rutrum orci augue iaculis nibh quis porta nunc nisi suscipit leo nam ac lacus</p>
-            <footer><a class="btn" href="#">More Details</a></footer>
+          <article><a href="#"><i class="fas fa-dollar-sign"></i></a>
+            <h6 class="heading">Economics</h6>
+            <p>
+              <ul>
+                <li>Gini Index: {{gini_index}} </li>
+                <li>Poverty Rate: {{poverty_rate}} %</li>
+              </ul>
+            </p>
           </article>
         </li>
         <li class="one_quarter">
-          <article><a href="#"><i class="fas fa-wine-glass"></i></a>
-            <h6 class="heading">Facilisis</h6>
-            <p>Cras tempor ultricies urna aliquam massa sapien posuere in iaculis adipiscing vulputate</p>
-            <footer><a class="btn" href="#">More Details</a></footer>
+          <article><a href="#"><i class="fas fa-home"></i></a>
+            <h6 class="heading">Housing Value</h6>
+            <p>
+              <ul>
+                <li>Gini Index: {{gini_index}} </li>
+                <li>Poverty Rate: {{poverty_rate}} %</li>
+              </ul>
+            </p>
           </article>
         </li>
       </ul>
@@ -134,25 +101,17 @@
   <section id="references" class="hoc container clear"> 
     <!-- ################################################################################################ -->
     <div class="sectiontitle">
-      <h6 class="heading">Aliquet vestibulum</h6>
+      <h6 class="heading">Amenities</h6>
       <p>Eget magna eget sem imperdiet tincidunt vestibulum fringilla nulla</p>
     </div>
+    <div id="poi-map" style="background-color:f1faee;height:800px;width:700px;float:right;">
+      <br>
+      <br>
+      {{ html_map_poi | safe }}
+  </div>
     <nav class="ref-sort">
-      <ul>
-        <li class="current"><a href="#">Ultricies</a></li>
-        <li><a href="#">Curabitur</a></li>
-        <li><a href="#">Porttitor</a></li>
-        <li><a href="#">Pulvinar</a></li>
-      </ul>
+
     </nav>
-    <ul class="nospace group ref-img">
-      <li class="one_third"><a class="imgover" href="#"><img src="images/demo/348x261.png" alt=""></a></li>
-      <li class="one_third"><a class="imgover" href="#"><img src="images/demo/348x261.png" alt=""></a></li>
-      <li class="one_third"><a class="imgover" href="#"><img src="images/demo/348x261.png" alt=""></a></li>
-      <li class="one_third"><a class="imgover" href="#"><img src="images/demo/348x261.png" alt=""></a></li>
-      <li class="one_third"><a class="imgover" href="#"><img src="images/demo/348x261.png" alt=""></a></li>
-      <li class="one_third"><a class="imgover" href="#"><img src="images/demo/348x261.png" alt=""></a></li>
-    </ul>
     <footer class="block center"><a class="btn" href="#">View more here</a></footer>
     <!-- ################################################################################################ -->
   </section>

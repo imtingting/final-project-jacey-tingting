@@ -222,9 +222,9 @@ def get_info():
 
 
 # Html
-# Html_content
-    html_content= render_template(
-        "Content.html",
+# Html_main
+    html_main= render_template(
+        "Main.html",
         address=address,
         curr_time=curr_time,
         white_pop_pct = census_data['white_pop_pct'],
@@ -336,8 +336,18 @@ def get_info():
         mapbox_token=MAPBOX_TOKEN,
     )
     return render_template(
-        "POI.html",
-        html_content= html_content,
+        # "POI.html",
+        "Main.html",
+        address=address,
+        curr_time=curr_time,
+        white_pop_pct = census_data['white_pop_pct'],
+        black_pop_pct = census_data['black_pop_pct'],
+        asian_pop_pct = census_data['asian_pop_pct'],
+        hispanic_pop_pct = census_data['hispanic_pop_pct'],
+        gini_index = census_data['gini_index'],
+        poverty_rate = census_data['poverty_rate'],
+        median_age = census_data['median_age'],
+        # html_main= html_main,
         html_map_poi = html_map_poi,
         html_transportation=html_transportation,
         center_lng=lng,

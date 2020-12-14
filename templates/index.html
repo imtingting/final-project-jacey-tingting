@@ -4,21 +4,25 @@
 <title>Find A Liveable Place</title>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-<link href="layout/styles/layout.css" rel="stylesheet" type="text/css" media="all">
+<link href="templates/layout/styles/layout.css" rel="stylesheet" type="text/css" media="all">
+<!-- CSS
+  –––––––––––––––––––––––––––––––––––––––––––––––––– -->
+<link rel="stylesheet" href="{{ url_for('static', filename='layout/styles/layout.css') }}">
+
 </head>
 <body id="top">
 <!-- ################################################################################################ -->
 <!-- ################################################################################################ -->
 <!-- ################################################################################################ -->
 <!-- Top Background Image Wrapper -->
-<div class="bgded overlay" style="background-image:url('images/demo/backgrounds/Philadelphia.jpg');"> 
+<div class="bgded overlay" style="background-image:url('static/images/demo/backgrounds/Philadelphia.jpg');"> 
   <!-- ################################################################################################ -->
-  <div class="wrapper row1">
-    <header id="header" class="hoc clear"> 
+  <!-- <div class="wrapper row1"> -->
+    <!-- <header id="header" class="hoc clear">  -->
       <!-- ################################################################################################ -->
-      <div id="logo" class="fl_left">
+      <!-- <div id="logo" class="fl_left">
         <h1><a href="index.html">Yeinydd</a></h1>
-      </div>
+      </div> -->
       <!-- ################################################################################################ -->
       <!-- <nav id="mainav" class="fl_right">
         <ul class="clear">
@@ -53,20 +57,26 @@
         </ul>
       </nav> -->
       <!-- ################################################################################################ -->
-    </header>
-  </div>
+    <!-- </header> -->
+  <!-- </div> -->
   <!-- ################################################################################################ -->
   <!-- ################################################################################################ -->
   <!-- ################################################################################################ -->
   <div id="pageintro" class="hoc clear"> 
     <!-- ################################################################################################ -->
     <article>
-      <h3 class="heading">Gravida ligula pulvinar</h3>
-      <p>Find an address or place.</p>
+      <h3 class="heading">Welcome!</h3>
+      <p >Are you looking for a location to live in Philadelphia, try puting an address below, we will tell you the surrounding environment of the location.</p>
+      <p>You may want to search:</p>
+      <ul>
+        <li>Center City: 210 W Rittenhouse Square, Philadelphia</li>
+        <li>University City: 3900 Chestnut Street, Philadelphia</li>
+        <li>North Philadelphia: 1801 N Broad St, Philadelphia</li>
+      </ul>
       <footer>
         <form class="group" action="{{ url_for('get_info') }}" method="get">
           <fieldset>
-            <legend>Sign-Up:</legend>
+            <legend>Address</legend>
             <input type="text" name="address" id="address" placeholder="Find an address&hellip;">
             <!-- <input type="submit" value="Search"> -->
             <button class="fas fa-sign-in-alt" type="submit" title="Submit"><em>Submit</em></button>
