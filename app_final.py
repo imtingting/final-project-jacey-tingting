@@ -126,6 +126,7 @@ def get_info():
     lng, lat = resp.json()["features"][0]["center"]
     user_input.lng=lng
     user_input.lat=lat
+    user_input.address=address
 
 # Amenity
     job_config_market = bigquery.QueryJobConfig(
@@ -297,6 +298,7 @@ def get_info():
 def get_transit():
     lng=user_input.lng
     lat=user_input.lat
+    address=user_input.address
 #Transit query
     query_bus = text("""
     SELECT "Stop_Name","Mode","Latitude","Longitude",geometry,
@@ -323,6 +325,7 @@ def get_transit():
     mapbox_token=MAPBOX_TOKEN,
     center_lng=lng,
     center_lat=lat,
+    address=address,
     bus1_lng=bus['Longitude'][0],
     bus2_lng=bus['Longitude'][1],
     bus3_lng=bus['Longitude'][2],
@@ -358,10 +361,12 @@ def get_transit():
 def get_shooting():
     lng=user_input.lng
     lat=user_input.lat
+    address=user_input.address
     return render_template(
     "shooting.html",
     center_lng=lng,
-    center_lat=lat
+    center_lat=lat,
+    address=address
     )
 
 
