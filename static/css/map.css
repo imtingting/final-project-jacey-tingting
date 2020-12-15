@@ -3,8 +3,8 @@
     font: 12px/20px 'Helvetica Neue', Arial, Helvetica, sans-serif;
 }
 
-#map { position: relative; width: 700px; height: 500px; float: right; margin-right: 15px;}
-body { margin:50px; padding:0;}
+/* #map { position: relative; width: 700px; height: 500px; float: right} */
+/* body { margin:0; padding:0;} */
 /* #map { position:absolute; top:20px; right:20px; width:60%; } */
 /* #map { position: relative; width: 800px; height: 480px;} */
 /* #map2 { position:absolute; top:0; bottom:0; right: 0; width:50%;} */

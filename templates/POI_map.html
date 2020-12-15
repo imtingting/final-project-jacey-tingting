@@ -11,7 +11,7 @@
 
 <body>
     <div id="map"></div>
-<nav id="filter-group" class="filter-group"></nav>
+    <nav id="filter-group" class="filter-group"></nav>
 
 <script>
 
@@ -22,16 +22,6 @@
     var places = {
         'type': 'FeatureCollection',
         'features': [
-            {
-                'type': 'Feature',
-                'properties': {
-                    'icon': 'home'
-                },
-                'geometry': {
-                    'type': 'Point',
-                    'coordinates': [{{ center_lng }}, {{ center_lat }}]
-                }
-            },
             {
                 'type': 'Feature',
                 'properties': {
@@ -151,6 +141,17 @@
         zoom: 15
     });
 
+	var marker = new mapboxgl.Marker({
+		'color': '#ffbf00'
+	});
+
+	// Create a LngLat object to use in the marker initialization
+	// https://docs.mapbox.com/mapbox-gl-js/api/#lnglat
+	var lngLat = {
+		lon: {{center_lng}},
+		lat: {{center_lat}}
+	};
+
     map.on('load', function () {
         // Add a GeoJSON source containing place coordinates and information.
         map.addSource('places', {
@@ -238,6 +239,7 @@
         });
 
         })
+        marker.setLngLat(lngLat).addTo(map);
     });
 
 </script>

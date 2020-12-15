@@ -1,46 +1,69 @@
 <!DOCTYPE html>
-<html lang="en">
-
+<html lang="">
 <head>
-
-  <!-- Basic Page Needs
-  –––––––––––––––––––––––––––––––––––––––––––––––––– -->
-  <meta charset="utf-8">
-  <title>Nearest Amenity</title>
-  <meta name="description" content="">
-  <meta name="author" content="">
-
-  <!-- Mobile Specific Metas
-  –––––––––––––––––––––––––––––––––––––––––––––––––– -->
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-
-  <!-- FONT
-  –––––––––––––––––––––––––––––––––––––––––––––––––– -->
-  <link href="//fonts.googleapis.com/css?family=Raleway:400,300,600" rel="stylesheet" type="text/css">
-
-  <!-- CSS
-  –––––––––––––––––––––––––––––––––––––––––––––––––– -->
-  <!-- <link rel="stylesheet" href="{{ url_for('static', filename='css/normalize.css') }}">
-  <link rel="stylesheet" href="{{ url_for('static', filename='css/skeleton.css') }}">
-
-  <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}"> -->
-  <!-- Favicon
-  –––––––––––––––––––––––––––––––––––––––––––––––––– -->
-  <!-- <link rel="icon" type="image/png" href="{{ url_for('static', filename='images/favicon.png') }}"> -->
+<title>Find A Liveable Place</title>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<!-- <link href="layout/styles/layout.css" rel="stylesheet" type="text/css" media="all"> -->
+<link rel="stylesheet" href="{{ url_for('static', filename='layout/styles/layout.css') }}">
 </head>
-
-<div id="container" style="width:500">
-
-    <div id="header" style="background-color:a8dadc;">
-        <h1 style="margin-bottom:0;">Amenities around the address</h1></div>
-
-    <div id="report" style="background-color:f1faee;height:690px;width:500px;float:left;">
-        {% include 'input.html' %}
+<body id="top">
+<!-- End Top Background Image Wrapper -->
+<div class="wrapper row3">
+  <main class="hoc container clear"> 
+    <!-- main body -->
+    <section id="introblocks">
+      <div class="sectiontitle">
+        <h3 class="heading">Basic Information</h3>
         <br>
         <br>
-        {{ html_content | safe }}
-    </div>
+        <h4>In  {{address}}</h4>
+      </div>
+      <ul class="nospace group">
+        <li class="one_quarter first">
+          <article><a href="#"><i class="fas fa-users"></i></a>
+            <h6 class="heading">Race</h6>
+            <p>
+              <ul>
+                <li> White Population: {{white_pop_pct}} %</li>
+                <li> Black Population: {{black_pop_pct}} %</li>
+                <li> Asian Population: {{asian_pop_pct}} %</li>
+                <li> Hispanic Population: {{hispanic_pop_pct}} %</li>
+              </ul>
+            </p>
+          </article>
+        </li>
+        <li class="one_quarter">
+          <article><a href="#"><i class="fas fa-child"></i></a>
+            <h6 class="heading">Age</h6>
+            <p>Median Age: {{median_age}}</p>
+          </article>
+        </li>
+        <li class="one_quarter">
+          <article><a href="#"><i class="fas fa-dollar-sign"></i></a>
+            <h6 class="heading">Economics</h6>
+            <p>
+              <ul>
+                <li>Gini Index: {{gini_index}} </li>
+                <li>Poverty Rate: {{poverty_rate}} %</li>
+              </ul>
+            </p>
+          </article>
+        </li>
+        <li class="one_quarter">
+          <article><a href="#"><i class="fas fa-home"></i></a>
+            <h6 class="heading">Housing Value</h6>
+            <p>
+              <ul>
+                <li>Median Rent: $ {{median_rent}} </li>
+                <li>Median Housing Value: $ {{median_housing_value}}</li>
+              </ul>
+            </p>
+          </article>
+        </li>
+      </ul>
+    </section>
 </div>
-{{ html_map | safe }}
 
+</body>
 </html>

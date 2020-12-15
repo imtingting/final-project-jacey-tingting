@@ -34,42 +34,45 @@
   <div id='map'></div>
 
   <!-- Create a sidebar with buttons for each option -->
-  <div class='absolute fl my24 mx24 py24 px24 bg-gray-faint round'>
-    <form id='params'>
-      <h4 class='txt-m txt-bold mb6'>Choose a travel mode:</h4>
-      <div class='mb12 mr12 toggle-group align-center'>
-        <label class='toggle-container'>
-          <input name='profile' type='radio' value='walking'checked>
-          <div class='toggle toggle--active-null toggle--null'>Walking</div>
-        </label>
-        <label class='toggle-container'>
-          <input name='profile' type='radio' value='cycling'>
-          <div class='toggle toggle--active-null toggle--null'>Cycling</div>
-        </label>
-        <label class='toggle-container'>
-          <input name='profile' type='radio' value='driving'>
-          <div class='toggle toggle--active-null toggle--null'>Driving</div>
-        </label>
-      </div>
-      <h4 class='txt-m txt-bold mb6'>Choose a maximum duration:</h4>
-      <div class='mb12 mr12 toggle-group align-center'>
-        <label class='toggle-container'>
-          <input name='duration' type='radio' value='10' checked>
-          <div class='toggle toggle--active-null toggle--null'>10 min</div>
-        </label>
-        <label class='toggle-container'>
-          <input name='duration' type='radio' value='20'>
-          <div class='toggle toggle--active-null toggle--null'>20 min</div>
-        </label>
-        <label class='toggle-container'>
-          <input name='duration' type='radio' value='30'>
-          <div class='toggle toggle--active-null toggle--null'>30 min</div>
-        </label>
-      </div>
-    </form>
+  <div style = "position: fixed;left:1100px; z-index:9999">
+    <div class='absolute fl my24 mx24 py24 px24 bg-gray-faint round'>
+      <form id='params'>
+        <h4 class='txt-m txt-bold mb6'>Choose a travel mode:</h4>
+        <div class='mb12 mr12 toggle-group align-center'>
+          <label class='toggle-container'>
+            <input name='profile' type='radio' value='walking'checked>
+            <div class='toggle toggle--active-null toggle--null'>Walking</div>
+          </label>
+          <label class='toggle-container'>
+            <input name='profile' type='radio' value='cycling'>
+            <div class='toggle toggle--active-null toggle--null'>Cycling</div>
+          </label>
+          <label class='toggle-container'>
+            <input name='profile' type='radio' value='driving'>
+            <div class='toggle toggle--active-null toggle--null'>Driving</div>
+          </label>
+        </div>
+        <h4 class='txt-m txt-bold mb6'>Choose a maximum duration:</h4>
+        <div class='mb12 mr12 toggle-group align-center'>
+          <label class='toggle-container'>
+            <input name='duration' type='radio' value='10' checked>
+            <div class='toggle toggle--active-null toggle--null'>10 min</div>
+          </label>
+          <label class='toggle-container'>
+            <input name='duration' type='radio' value='20'>
+            <div class='toggle toggle--active-null toggle--null'>20 min</div>
+          </label>
+          <label class='toggle-container'>
+            <input name='duration' type='radio' value='30'>
+            <div class='toggle toggle--active-null toggle--null'>30 min</div>
+          </label>
+        </div>
+      </form>
+    </div>
   </div>
 
-  <div style = "position:absolute;left:1000px">
+
+  <!-- <div style = "position:absolute;left:1000px">
     <form method="get" action="{{url_for('get_shooting')}}">
       <button type="submit"
       style="display: inline-block;
@@ -134,7 +137,7 @@
         cursor: pointer;
         box-sizing: border-box;"> Main Page </button>
     </form>
-  </div>
+  </div> -->
 
   <script>
     // Add your Mapbox access token

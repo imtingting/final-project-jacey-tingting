@@ -6,7 +6,7 @@
   <!-- Basic Page Needs
   –––––––––––––––––––––––––––––––––––––––––––––––––– -->
   <meta charset="utf-8">
-  <title>Nearest Amenity</title>
+  <title>Transportation</title>
   <meta name="description" content="">
   <meta name="author" content="">
 
@@ -30,21 +30,21 @@
 <section  style="margin-left: 70px;">
   <div id="container" style="width:500px">
     <div id="header" style="background-color:a8dadc;">
-        <h1>Basic Condition & Amenity</h1></div>
+        <h1>Transportation</h1></div>
         <div id="report">
           {% include 'input.html' %}
-           {{ html_content | safe }}
+           {{ html_trans_content | safe }}
         </div>
   </div>
   <div id="map" style="position:absolute; left:620px; top:90px; height:620px;width:810px">
-    {{ html_map_poi | safe }}
+    {{ html_trans_map | safe }}
   </div>
     <div style = "position:absolute;left:70px; top: 800">
-        <form method="get" action="{{url_for('get_transit')}}">
+        <form method="get" action="{{url_for('get_info')}}">
          <input type="hidden"
             name="address"
             value={{address}}>
-         <button class="button-primary" type="submit">Transportation</button>
+         <button class="button-primary" type="submit">Basic Info</button>
         </form>
     </div>
     <div style = "position:absolute;left:255px; top: 800">

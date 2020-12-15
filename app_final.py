@@ -320,40 +320,65 @@ def get_transit():
     """)
     rail=gpd.GeoDataFrame([dict(row) for row in engine.execute(query_rail, longitude=lng, latitude=lat).fetchall()])
 
+    html_trans_map = render_template(
+        "transportation.html",
+        mapbox_token=MAPBOX_TOKEN,
+        center_lng=lng,
+        center_lat=lat,
+        address=address,
+        bus1_lng=bus['Longitude'][0],
+        bus2_lng=bus['Longitude'][1],
+        bus3_lng=bus['Longitude'][2],
+        bus4_lng=bus['Longitude'][3],
+        bus5_lng=bus['Longitude'][4],
+        bus1_lat=bus['Latitude'][0],
+        bus2_lat=bus['Latitude'][1],
+        bus3_lat=bus['Latitude'][2],
+        bus4_lat=bus['Latitude'][3],
+        bus5_lat=bus['Latitude'][4],
+        rail1_lng=rail['Longitude'][0],
+        rail2_lng=rail['Longitude'][1],
+        rail1_lat=rail['Latitude'][0],
+        rail2_lat=rail['Latitude'][1],
+        bus_stop1=bus['Stop_Name'][0],
+        bus_stop2=bus['Stop_Name'][1],
+        bus_stop3=bus['Stop_Name'][2],
+        bus_stop4=bus['Stop_Name'][3],
+        bus_stop5=bus['Stop_Name'][4],
+        distance_bus1=bus['distance'][0],
+        distance_bus2=bus['distance'][1],
+        distance_bus3=bus['distance'][2],
+        distance_bus4=bus['distance'][3],
+        distance_bus5=bus['distance'][4],
+        rail_stop1=rail['Stop_Name'][0],
+        rail_stop2=rail['Stop_Name'][1],
+        distance_rail1=rail['distance'][0],
+        distance_rail2=rail['distance'][1]
+    )
+
+    html_trans_content = render_template(
+        "trans_content.html",
+        bus_stop1=bus['Stop_Name'][0],
+        bus_stop2=bus['Stop_Name'][1],
+        bus_stop3=bus['Stop_Name'][2],
+        bus_stop4=bus['Stop_Name'][3],
+        bus_stop5=bus['Stop_Name'][4],
+        distance_bus1=bus['distance'][0],
+        distance_bus2=bus['distance'][1],
+        distance_bus3=bus['distance'][2],
+        distance_bus4=bus['distance'][3],
+        distance_bus5=bus['distance'][4],
+        rail_stop1=rail['Stop_Name'][0],
+        rail_stop2=rail['Stop_Name'][1],
+        distance_rail1=rail['distance'][0],
+        distance_rail2=rail['distance'][1]
+    )
+
+
     return render_template(
-    "transportation.html",
-    mapbox_token=MAPBOX_TOKEN,
-    center_lng=lng,
-    center_lat=lat,
-    address=address,
-    bus1_lng=bus['Longitude'][0],
-    bus2_lng=bus['Longitude'][1],
-    bus3_lng=bus['Longitude'][2],
-    bus4_lng=bus['Longitude'][3],
-    bus5_lng=bus['Longitude'][4],
-    bus1_lat=bus['Latitude'][0],
-    bus2_lat=bus['Latitude'][1],
-    bus3_lat=bus['Latitude'][2],
-    bus4_lat=bus['Latitude'][3],
-    bus5_lat=bus['Latitude'][4],
-    rail1_lng=rail['Longitude'][0],
-    rail2_lng=rail['Longitude'][1],
-    rail1_lat=rail['Latitude'][0],
-    rail2_lat=rail['Latitude'][1],
-    bus_stop1=bus['Stop_Name'][0],
-    bus_stop2=bus['Stop_Name'][1],
-    bus_stop3=bus['Stop_Name'][2],
-    bus_stop4=bus['Stop_Name'][3],
-    bus_stop5=bus['Stop_Name'][4],
-    distance_bus1=bus['distance'][0],
-    distance_bus2=bus['distance'][1],
-    distance_bus3=bus['distance'][2],
-    distance_bus4=bus['distance'][3],
-    distance_bus5=bus['distance'][4],
-    rail_stop1=rail['Stop_Name'][0],
-    rail_stop2=rail['Stop_Name'][1],
-    distance_rail1=rail['distance'][0],
-    distance_rail2=rail['distance'][1]
+    "TransportationPage.html",
+    html_trans_map = html_trans_map,
+    html_trans_content = html_trans_content
     )
 
 
@@ -369,9 +394,15 @@ def get_shooting():
     address=address
     )
 
-
-
-
+@app.route("/census_download", methods=["GET"])
+def transportation_download():
+    """Download GeoJSON of data snapshot"""
+    lng=user_input.lng
+    lat=user_input.lat
+    address=user_input.address
+    data = get_geo_tract(lng, lat)
+    
+    return Response(data.to_json(), 200, mimetype="application/json")
 
 
 # 404 page example
