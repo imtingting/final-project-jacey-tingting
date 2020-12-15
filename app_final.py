@@ -44,6 +44,13 @@ DATABASE = pg_creds["DATABASE"]
 PORT = pg_creds["PORT"]
 engine = create_engine(f"postgresql://{USERNAME}:{PASSWORD}@{HOST}:{PORT}/{DATABASE}")
 
+class UserInput():
+    address="Meyerson Hall, Philadelphia"
+    lng=-75.19
+    lat=39.95
+
+user_input=UserInput()
+
 # index page
 @app.route("/")
 def index():
@@ -117,32 +124,8 @@ def get_info():
     )
     resp = requests.get(geocoding_call)
     lng, lat = resp.json()["features"][0]["center"]
-
-
-#Transit
-    query_bus = text("""
-    SELECT "Stop_Name","Mode","Latitude","Longitude",geometry,
-        ROUND(ST_Distance(geometry::geography,ST_MakePoint(:longitude,:latitude)::geography)) AS Distance
-    FROM stops_philly
-    WHERE "Mode"!='Highspeed'
-    ORDER BY Distance
-    LIMIT 5
-    """)
-    bus=gpd.GeoDataFrame([dict(row) for row in engine.execute(query_bus, longitude=lng, latitude=lat).fetchall()])
-
-    query_rail = text("""
-    SELECT "Stop_Name","Mode","Latitude","Longitude",geometry,
-        ROUND(ST_Distance(geometry::geography,ST_MakePoint(:longitude,:latitude)::geography)) AS Distance
-    FROM stops_philly
-    WHERE "Mode"='Highspeed'
-    ORDER BY Distance
-    LIMIT 2
-    """)
-    rail=gpd.GeoDataFrame([dict(row) for row in engine.execute(query_rail, longitude=lng, latitude=lat).fetchall()])
-
-
-# Basic map
-
+    user_input.lng=lng
+    user_input.lat=lat
 
 # Amenity
     job_config_market = bigquery.QueryJobConfig(
@@ -252,23 +235,7 @@ def get_info():
         distance_supermarket1 = nearest_supermarket[0]['distance_away_meters'],
         distance_supermarket2 = nearest_supermarket[1]['distance_away_meters'],
         distance_supermarket3 = nearest_supermarket[2]['distance_away_meters'],
-        bus_stop1=bus['Stop_Name'][0],
-        bus_stop2=bus['Stop_Name'][1],
-        bus_stop3=bus['Stop_Name'][2],
-        bus_stop4=bus['Stop_Name'][3],
-        bus_stop5=bus['Stop_Name'][4],
-        distance_bus1=bus['distance'][0],
-        distance_bus2=bus['distance'][1],
-        distance_bus3=bus['distance'][2],
-        distance_bus4=bus['distance'][3],
-        distance_bus5=bus['distance'][4],
-        rail_stop1=rail['Stop_Name'][0],
-        rail_stop2=rail['Stop_Name'][1],
-        distance_rail1=rail['distance'][0],
-        distance_rail2=rail['distance'][1]
         )
-        # {{rail_stop1}} : {{distance_bus1}}
-        # Stop_Name	Mode	Latitude	Longitude
 
 # Html_map_poi
     html_map_poi = render_template(
@@ -307,34 +274,7 @@ def get_info():
                 supermarket4_lat = nearest_supermarket[3]['latitude'],
                 supermarket5_lat = nearest_supermarket[4]['latitude']
                 )
-    html_transportation = render_template(
-            "transportation.html",
-            mapbox_token=MAPBOX_TOKEN,
-            center_lng= lng,
-            center_lat= lat,
-            bus1_lng=bus['Longitude'][0],
-            bus2_lng=bus['Longitude'][1],
-            bus3_lng=bus['Longitude'][2],
-            bus4_lng=bus['Longitude'][3],
-            bus5_lng=bus['Longitude'][4],
-            bus1_lat=bus['Latitude'][0],
-            bus2_lat=bus['Latitude'][1],
-            bus3_lat=bus['Latitude'][2],
-            bus4_lat=bus['Latitude'][3],
-            bus5_lat=bus['Latitude'][4],
-            rail1_lng=rail['Longitude'][0],
-            rail2_lng=rail['Longitude'][1],
-            rail1_lat=rail['Latitude'][0],
-            rail2_lat=rail['Latitude'][1]
-            )
 # Basic condition map
-    html_map_basic = render_template(
-        "basic_map.html",
-        geojson_tract=tract_gdf.to_json(),
-        center_lng=lng,
-        center_lat=lat,
-        mapbox_token=MAPBOX_TOKEN,
-    )
     return render_template(
         # "POI.html",
         "Main.html",
@@ -351,12 +291,86 @@ def get_info():
         median_housing_value = census_data['median_housing_value'],
         # html_main= html_main,
         html_map_poi = html_map_poi,
-        html_transportation=html_transportation,
         center_lng=lng,
         center_lat=lat
         )
 
 # @app.route("/basic/", methods=["GET"])
+
+@app.route("/transit/")
+def get_transit():
+    lng=user_input.lng
+    lat=user_input.lat
+#Transit query
+    query_bus = text("""
+    SELECT "Stop_Name","Mode","Latitude","Longitude",geometry,
+        ROUND(ST_Distance(geometry::geography,ST_MakePoint(:longitude,:latitude)::geography)) AS Distance
+    FROM stops_philly
+    WHERE "Mode"!='Highspeed'
+    ORDER BY Distance
+    LIMIT 5
+    """)
+    bus=gpd.GeoDataFrame([dict(row) for row in engine.execute(query_bus, longitude=lng, latitude=lat).fetchall()])
+
+    query_rail = text("""
+    SELECT "Stop_Name","Mode","Latitude","Longitude",geometry,
+        ROUND(ST_Distance(geometry::geography,ST_MakePoint(:longitude,:latitude)::geography)) AS Distance
+    FROM stops_philly
+    WHERE "Mode"='Highspeed'
+    ORDER BY Distance
+    LIMIT 2
+    """)
+    rail=gpd.GeoDataFrame([dict(row) for row in engine.execute(query_rail, longitude=lng, latitude=lat).fetchall()])
+
+    return render_template(
+    "transportation.html",
+    mapbox_token=MAPBOX_TOKEN,
+    center_lng=lng,
+    center_lat=lat,
+    bus1_lng=bus['Longitude'][0],
+    bus2_lng=bus['Longitude'][1],
+    bus3_lng=bus['Longitude'][2],
+    bus4_lng=bus['Longitude'][3],
+    bus5_lng=bus['Longitude'][4],
+    bus1_lat=bus['Latitude'][0],
+    bus2_lat=bus['Latitude'][1],
+    bus3_lat=bus['Latitude'][2],
+    bus4_lat=bus['Latitude'][3],
+    bus5_lat=bus['Latitude'][4],
+    rail1_lng=rail['Longitude'][0],
+    rail2_lng=rail['Longitude'][1],
+    rail1_lat=rail['Latitude'][0],
+    rail2_lat=rail['Latitude'][1],
+    bus_stop1=bus['Stop_Name'][0],
+    bus_stop2=bus['Stop_Name'][1],
+    bus_stop3=bus['Stop_Name'][2],
+    bus_stop4=bus['Stop_Name'][3],
+    bus_stop5=bus['Stop_Name'][4],
+    distance_bus1=bus['distance'][0],
+    distance_bus2=bus['distance'][1],
+    distance_bus3=bus['distance'][2],
+    distance_bus4=bus['distance'][3],
+    distance_bus5=bus['distance'][4],
+    rail_stop1=rail['Stop_Name'][0],
+    rail_stop2=rail['Stop_Name'][1],
+    distance_rail1=rail['distance'][0],
+    distance_rail2=rail['distance'][1]
+    )
+
+
+@app.route("/shooting/")
+def get_shooting():
+    lng=user_input.lng
+    lat=user_input.lat
+    return render_template(
+    "shooting.html",
+    center_lng=lng,
+    center_lat=lat
+    )
+
+
+
+
 
 
 # 404 page example

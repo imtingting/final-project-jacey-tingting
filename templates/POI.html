@@ -35,15 +35,12 @@
         <h1 style="margin-bottom:0;">Amenities around the address</h1></div>
     <div id="report" style="background-color:f1faee;height:690px;width:500px;float:left;">
         {% include 'input.html' %}
+        <br>
+        <br>
         {{ html_content | safe }}
     </div>
-    <div id="poi-map" style="background-color:f1faee;height:800px;width:700px;float:right;">
-        <br>
-        <br>
+    <div id="map" style="background-color:f1faee;height:800px;width:700px;float:right;">
         {{ html_map_poi | safe }}
-    </div>
-    <div id="transportation-map" style="background-color:f1faee;height:800px;width:700px;float:right;">
-        {{ html_transportation | safe }}
     </div>
 </div>
 
