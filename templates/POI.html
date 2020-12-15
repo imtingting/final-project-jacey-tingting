@@ -39,27 +39,30 @@
   <div id="map" style="position:absolute; left:620px; top:90px; height:620px;width:810px">
     {{ html_map_poi | safe }}
   </div>
-    <div style = "position:absolute;left:70px; top: 800">
+    <div style = "position:absolute;left:620px; top: 30px">
         <form method="get" action="{{url_for('get_transit')}}">
          <input type="hidden"
             name="address"
             value={{address}}>
-         <button class="button-primary" type="submit">Transportation</button>
+         <button class="button" type="submit">Transportation</button>
         </form>
     </div>
-    <div style = "position:absolute;left:255px; top: 800">
+    <div style = "position:absolute;left:850px; top: 30px">
         <form method="get" action="{{url_for('get_shooting')}}">
          <input type="hidden"
             name="address"
             value={{address}}>
-         <button class="button-primary" type="submit">Crime Density</button>
+         <button class="button" type="submit">Crime Density</button>
         </form>
     </div>
-    <div style = "position:absolute;left:435px; top: 800">
+    <div style = "position:absolute;left:1065px; top: 30px">
       <form method="get" action="{{url_for('index')}}">
-       <button class="button-primary" type="submit">Main Page</button>
+       <button class="button" type="submit">Main Page</button>
       </form>
     </div>
+    <div style = "position:absolute;left:1250px; top: 30px">
+      <button class="button" href="{{ url_for('census_download') }}, lng=center_lng, lat=center_lat">Download data</button>
+  </div>
 </section>
 
 

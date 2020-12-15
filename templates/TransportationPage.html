@@ -16,13 +16,13 @@
 
   <!-- FONT
   –––––––––––––––––––––––––––––––––––––––––––––––––– -->
-  <link href="//fonts.googleapis.com/css?family=Raleway:400,300,600" rel="stylesheet" type="text/css">
+  <link href="//fonts.googleapis.com/css?family=Raleway:400,300,600" rel="stylesheet" type="text/css" !important>
 
   <!-- CSS
   –––––––––––––––––––––––––––––––––––––––––––––––––– -->
   <!-- <link rel="stylesheet" href="{{ url_for('static', filename='css/normalize.css') }}"> -->
   <link rel="stylesheet" href="{{ url_for('static', filename='css/skeleton.css') }}">
-  <!-- <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}"> -->
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
   <!-- Favicon
   –––––––––––––––––––––––––––––––––––––––––––––––––– -->
   <!-- <link rel="icon" type="image/png" href="{{ url_for('static', filename='images/favicon.png') }}"> -->
@@ -33,13 +33,15 @@
         <h1>Transportation</h1></div>
         <div id="report">
           {% include 'input.html' %}
+          <br>
+          <br>
            {{ html_trans_content | safe }}
         </div>
   </div>
   <div id="map" style="position:absolute; left:620px; top:90px; height:620px;width:810px">
     {{ html_trans_map | safe }}
   </div>
-    <div style = "position:absolute;left:70px; top: 800">
+    <div style = "position:absolute;left:620px; top: 30px">
         <form method="get" action="{{url_for('get_info')}}">
          <input type="hidden"
             name="address"
@@ -47,7 +49,7 @@
          <button class="button-primary" type="submit">Basic Info</button>
         </form>
     </div>
-    <div style = "position:absolute;left:255px; top: 800">
+    <div style = "position:absolute;left:850px; top: 30px">
         <form method="get" action="{{url_for('get_shooting')}}">
          <input type="hidden"
             name="address"
@@ -55,12 +57,11 @@
          <button class="button-primary" type="submit">Crime Density</button>
         </form>
     </div>
-    <div style = "position:absolute;left:435px; top: 800">
+    <div style = "position:absolute;left:1065px; top: 30px">
       <form method="get" action="{{url_for('index')}}">
        <button class="button-primary" type="submit">Main Page</button>
       </form>
     </div>
 </section>
-
 
 </html>

@@ -395,14 +395,13 @@ def get_shooting():
     )
 
 @app.route("/census_download", methods=["GET"])
-def transportation_download():
+def census_download():
     """Download GeoJSON of data snapshot"""
-    lng=user_input.lng
-    lat=user_input.lat
-    address=user_input.address
+    lng = request.args["lng"]
+    lat = request.args["lat"]
     data = get_geo_tract(lng, lat)
     
-    return Response(data.to_json(), 200, mimetype="application/json")
+    return Response(data, 200, mimetype="application/json")
 
 
 # 404 page example
