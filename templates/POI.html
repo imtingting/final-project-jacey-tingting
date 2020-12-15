@@ -32,6 +32,7 @@
     <div id="header" style="background-color:a8dadc;">
         <h1>Basic Condition & Amenity</h1></div>
         <div id="report">
+          <p>print: {{input_address}}</p>
           {% include 'input.html' %}
            {{ html_content | safe }}
         </div>
@@ -40,18 +41,12 @@
     {{ html_map_poi | safe }}
   </div>
     <div style = "position:absolute;left:620px; top: 30px">
-        <form method="get" action="{{url_for('get_transit')}}">
-         <input type="hidden"
-            name="address"
-            value={{address}}>
+        <form action="{{url_for('get_transit')}}">
          <button class="button" type="submit">Transportation</button>
         </form>
     </div>
     <div style = "position:absolute;left:850px; top: 30px">
         <form method="get" action="{{url_for('get_shooting')}}">
-         <input type="hidden"
-            name="address"
-            value={{address}}>
          <button class="button" type="submit">Crime Density</button>
         </form>
     </div>
@@ -61,7 +56,7 @@
       </form>
     </div>
     <div style = "position:absolute;left:1250px; top: 30px">
-      <button class="button" href="{{ url_for('census_download') }}, lng=center_lng, lat=center_lat">Download data</button>
+      <a class="button" href="{{ url_for('census_download', lng=center_lng, lat=center_lat)}}">Download data</a>
   </div>
 </section>
 

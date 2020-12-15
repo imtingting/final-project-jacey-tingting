@@ -112,12 +112,14 @@ def get_geo_tract(lng, lat):
 def get_info():
     address = request.args.get("address")
     if address is None:
+        user_input.address="Meyerson Hall, Philadelphia"
         return f"""
         <p>No address specified, try:</p>
         <div>
         <a href="{url_for('info', address='Meyerson Hall, University of Pennsylvania')}">{url_for('info', address='Meyerson Hall, University of Pennsylvania')}</a>
         </div>
         """
+    user_input.address=address
     geocoding_call = (
         "https://api.mapbox.com/geocoding/v5/mapbox.places/"
         f"{address}.json?access_token={MAPBOX_TOKEN}"
@@ -126,7 +128,6 @@ def get_info():
     lng, lat = resp.json()["features"][0]["center"]
     user_input.lng=lng
     user_input.lat=lat
-    user_input.address=address
 
 # Amenity
     job_config_market = bigquery.QueryJobConfig(
@@ -286,6 +287,7 @@ def get_info():
 # Basic condition map
     return render_template(
         "POI.html",
+        input_address=user_input.address,
         html_content= html_content,
         html_map_poi = html_map_poi,
         center_lng=lng,
@@ -377,6 +379,7 @@ def get_transit():
 
     return render_template(
     "TransportationPage.html",
+    address=user_input.address,
     html_trans_map = html_trans_map,
     html_trans_content = html_trans_content
     )
@@ -401,7 +404,7 @@ def census_download():
     lat = request.args["lat"]
     data = get_geo_tract(lng, lat)
     
-    return Response(data, 200, mimetype="application/json")
+    return Response(data.to_json(), 200, mimetype="application/json")
 
 
 # 404 page example
