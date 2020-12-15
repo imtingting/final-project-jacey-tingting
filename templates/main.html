@@ -43,7 +43,7 @@
         <h3 class="heading">Basic Information</h3>
         <br>
         <br>
-        <h4>In {{address}}</h4>
+        <h4>In  {{address}}</h4>
       </div>
       <ul class="nospace group">
         <li class="one_quarter first">
@@ -81,13 +81,14 @@
             <h6 class="heading">Housing Value</h6>
             <p>
               <ul>
-                <li>Gini Index: {{gini_index}} </li>
-                <li>Poverty Rate: {{poverty_rate}} %</li>
+                <li>Median Rent: $ {{median_rent}} </li>
+                <li>Median Housing Value: $ {{median_housing_value}}</li>
               </ul>
             </p>
           </article>
         </li>
       </ul>
+      </section>
     </section>
     <!-- ################################################################################################ -->
     <!-- / main body -->
@@ -98,21 +99,24 @@
 <!-- ################################################################################################ -->
 <!-- ################################################################################################ -->
 <div class="wrapper row2">
-  <section id="references" class="hoc container clear"> 
+  <!-- <section id="references" class="hoc container clear">  -->
     <!-- ################################################################################################ -->
     <div class="sectiontitle">
       <h6 class="heading">Amenities</h6>
       <p>Eget magna eget sem imperdiet tincidunt vestibulum fringilla nulla</p>
     </div>
-    <div id="poi-map" style="background-color:f1faee;height:800px;width:700px;float:right;">
+    <div id="amenity_text" class="one_quarter first">
       <br>
       <br>
-      {{ html_map_poi | safe }}
-  </div>
-    <nav class="ref-sort">
+      <p>sdfenudi</p>
+    </div>
+    <div class="group btmspace-50 demo">
+      <div id="poi-map" class="three_quarter">
+      <br>
+      <br>
 
-    </nav>
-    <footer class="block center"><a class="btn" href="#">View more here</a></footer>
+      </div>
+    </div>
     <!-- ################################################################################################ -->
   </section>
 </div>
@@ -123,7 +127,7 @@
   <section class="hoc container clear"> 
     <!-- ################################################################################################ -->
     <div class="sectiontitle">
-      <h6 class="heading">Pellentesque consectetuer</h6>
+      <h6 class="heading">Transportation</h6>
       <p>Felis vitae sapien gravida interdum curabitur eu quam nec est</p>
     </div>
     <div id="latest" class="group">
@@ -153,22 +157,15 @@
       </article>
       <article class="one_third"><a class="imgover" href="#"><img src="images/demo/348x261.png" alt=""></a>
         <div class="excerpt">
-          <time datetime="2045-04-01T08:15+00:00"><i class="far fa-calendar-alt"></i> 01<sup>st</sup> April 2045 @ 15:00pm</time>
           <h6 class="heading">Commodo metus proin blandit</h6>
-          <ul class="meta">
-            <li><i class="fas fa-user rgtspace-5"></i> <a href="#">Admin</a></li>
-            <li><i class="fas fa-tags rgtspace-5"></i> <a href="#">Tag 1</a>, <a href="#">Tag 2</a></li>
-          </ul>
+          {{ html_map_poi | safe }}
           <p>Quam molestie luctus vehicula orci massa interdum justo nec rutrum risus augue ut nisl suspendisse elit.</p>
-          <footer><a class="btn" href="#">Full Story</a></footer>
         </div>
       </article>
     </div>
     <!-- ################################################################################################ -->
   </section>
 </div>
-<!-- ################################################################################################ -->
-<!-- ################################################################################################ -->
 <!-- ################################################################################################ -->
 <div class="wrapper bgded overlay" style="background-image:url('images/demo/backgrounds/01.png');">
   <section id="testimonials" class="hoc container clear"> 
@@ -191,8 +188,6 @@
   </section>
 </div>
 <!-- ################################################################################################ -->
-<!-- ################################################################################################ -->
-<!-- ################################################################################################ -->
 <div class="wrapper row3">
   <article class="hoc cta clear"> 
     <!-- ################################################################################################ -->
@@ -201,88 +196,6 @@
     <!-- ################################################################################################ -->
   </article>
 </div>
-<!-- ################################################################################################ -->
-<!-- ################################################################################################ -->
-<!-- ################################################################################################ -->
-<div class="wrapper row4">
-  <footer id="footer" class="hoc clear"> 
-    <!-- ################################################################################################ -->
-    <div class="group btmspace-80">
-      <div class="one_third first">
-        <h6 class="heading">Non erat varius lacinia</h6>
-        <p>Morbi tincidunt in hac habitasse platea dictumst praesent pretium donec tincidunt laoreet diam nullam augue.</p>
-        <p class="btmspace-30">Tortor rhoncus sed dictum vitae viverra posuere lorem pellentesque suscipit eros vel ante curabitur pretium [<a href="#"><i class="fas fa-arrow-right"></i></a>]</p>
-        <ul class="faico clear">
-          <li><a class="faicon-dribble" href="#"><i class="fab fa-dribbble"></i></a></li>
-          <li><a class="faicon-facebook" href="#"><i class="fab fa-facebook"></i></a></li>
-          <li><a class="faicon-google-plus" href="#"><i class="fab fa-google-plus-g"></i></a></li>
-          <li><a class="faicon-linkedin" href="#"><i class="fab fa-linkedin"></i></a></li>
-          <li><a class="faicon-twitter" href="#"><i class="fab fa-twitter"></i></a></li>
-          <li><a class="faicon-vk" href="#"><i class="fab fa-vk"></i></a></li>
-        </ul>
-      </div>
-      <div class="one_third">
-        <h6 class="heading">Enim et mauris quisque vitae</h6>
-        <p class="nospace btmspace-15">Libero class aptent taciti sociosqu ad litora torquent per conubia nostra.</p>
-        <form method="post" action="#">
-          <fieldset>
-            <legend>Newsletter:</legend>
-            <input class="btmspace-15" type="text" value="" placeholder="Name">
-            <input class="btmspace-15" type="text" value="" placeholder="Email">
-            <button type="submit" value="submit">Submit</button>
-          </fieldset>
-        </form>
-      </div>
-      <div class="one_third">
-        <h6 class="heading">Per inceptos himenaeos</h6>
-        <ul class="nospace clear latestimg">
-          <li><a class="imgover" href="#"><img src="images/demo/100x100.png" alt=""></a></li>
-          <li><a class="imgover" href="#"><img src="images/demo/100x100.png" alt=""></a></li>
-          <li><a class="imgover" href="#"><img src="images/demo/100x100.png" alt=""></a></li>
-          <li><a class="imgover" href="#"><img src="images/demo/100x100.png" alt=""></a></li>
-          <li><a class="imgover" href="#"><img src="images/demo/100x100.png" alt=""></a></li>
-          <li><a class="imgover" href="#"><img src="images/demo/100x100.png" alt=""></a></li>
-        </ul>
-      </div>
-    </div>
-    <!-- ################################################################################################ -->
-    <div id="ctdetails" class="clear">
-      <ul class="nospace clear">
-        <li class="one_quarter first">
-          <div class="block clear"><a href="#"><i class="fas fa-phone"></i></a> <span><strong>Give us a call:</strong> +00 (123) 456 7890</span></div>
-        </li>
-        <li class="one_quarter">
-          <div class="block clear"><a href="#"><i class="fas fa-envelope"></i></a> <span><strong>Send us a mail:</strong> support@domain.com</span></div>
-        </li>
-        <li class="one_quarter">
-          <div class="block clear"><a href="#"><i class="fas fa-clock"></i></a> <span><strong> Monday - Saturday:</strong> 08.00am - 18.00pm</span></div>
-        </li>
-        <li class="one_quarter">
-          <div class="block clear"><a href="#"><i class="fas fa-map-marker-alt"></i></a> <span><strong>Come visit us:</strong> Directions to <a href="#">our location</a></span></div>
-        </li>
-      </ul>
-    </div>
-    <!-- ################################################################################################ -->
-  </footer>
-</div>
-<!-- ################################################################################################ -->
-<!-- ################################################################################################ -->
-<!-- ################################################################################################ -->
-<div class="wrapper row5">
-  <div id="copyright" class="hoc clear"> 
-    <!-- ################################################################################################ -->
-    <p class="fl_left">Copyright &copy; 2018 - All Rights Reserved - <a href="#">Domain Name</a></p>
-    <p class="fl_right">Template by <a target="_blank" href="https://www.os-templates.com/" title="Free Website Templates">OS Templates</a></p>
-    <!-- ################################################################################################ -->
-  </div>
-</div>
-<!-- ################################################################################################ -->
-<!-- ################################################################################################ -->
-<!-- ################################################################################################ -->
-<a id="backtotop" href="#top"><i class="fas fa-chevron-up"></i></a>
-<!-- JAVASCRIPTS -->
-<script src="layout/scripts/jquery.min.js"></script>
-<script src="layout/scripts/jquery.backtotop.js"></script>
-<script src="layout/scripts/jquery.mobilemenu.js"></script>
+
 </body>
 </html>

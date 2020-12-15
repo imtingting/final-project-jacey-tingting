@@ -55,6 +55,8 @@ File: Layout CSS
 .sectiontitle{display:block; max-width:55%; margin:0 auto 80px; text-align:center;}
 .sectiontitle .heading{margin:0; padding:0; line-height:1;}
 
+
+#poi_map{position: relative; padding: 110px 350px 28px 45px;}
 #introblocks{}
 #introblocks ul{text-align:center;}
 #introblocks ul li{}

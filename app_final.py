@@ -61,7 +61,8 @@ def get_basic_condition(lng, lat):
     query_census = f"""
          SELECT a.geo_id, total_pop, Round((white_pop/total_pop)*100, 2) as white_pop_pct, Round((black_pop/total_pop)*100, 2) as black_pop_pct,
          Round((asian_pop/total_pop)*100, 2) as asian_pop_pct, Round((hispanic_pop/total_pop)*100, 2) as hispanic_pop_pct, median_age, gini_index,
-         Round((poverty/total_pop)*100, 2) as poverty_rate, median_income, internal_point_lat, internal_point_lon, internal_point_geo, tract_geom
+         Round((poverty/total_pop)*100, 2) as poverty_rate, median_income, internal_point_lat, internal_point_lon, internal_point_geo, tract_geom,
+         median_rent, owner_occupied_housing_units_median_value as median_housing_value
          FROM bigquery-public-data.census_bureau_acs.censustract_2018_5yr as a
          LEFT JOIN
          (SELECT geo_id, internal_point_lat, internal_point_lon, internal_point_geo, tract_geom
@@ -84,8 +85,7 @@ def get_geo_tract(lng, lat):
     query_geo_tract = f"""
          SELECT a.geo_id, total_pop, Round((white_pop/total_pop)*100, 2) as white_pop_pct, Round((black_pop/total_pop)*100, 2) as black_pop_pct,
          Round((asian_pop/total_pop)*100, 2) as asian_pop_pct, Round((hispanic_pop/total_pop)*100, 2) as hispanic_pop_pct, median_age, gini_index,
-         Round((poverty/total_pop)*100, 2) as poverty_rate, median_income,
-         tract_geom,
+         Round((poverty/total_pop)*100, 2) as poverty_rate, median_income,tract_geom,
          ST_Distance(ST_GeogPoint(@lng, @lat), internal_point_geo) as distance_away_meters,
          FROM bigquery-public-data.census_bureau_acs.censustract_2018_5yr as a
          LEFT JOIN
@@ -347,6 +347,8 @@ def get_info():
         gini_index = census_data['gini_index'],
         poverty_rate = census_data['poverty_rate'],
         median_age = census_data['median_age'],
+        median_rent = census_data['median_rent'],
+        median_housing_value = census_data['median_housing_value'],
         # html_main= html_main,
         html_map_poi = html_map_poi,
         html_transportation=html_transportation,
