@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8" />
+<title>Shooting victim map</title>
+<meta name="viewport" content="initial-scale=1,maximum-scale=1,user-scalable=no" />
+<script src="https://api.mapbox.com/mapbox-gl-js/v2.0.0/mapbox-gl.js"></script>
+<link href="https://api.mapbox.com/mapbox-gl-js/v2.0.0/mapbox-gl.css" rel="stylesheet" />
+<style>
+	body { margin: 0; padding: 0; }
+	#map { position: absolute; top: 0; bottom: 0; width: 100%; }
+</style>
+</head>
+<body>
+<div id="map"></div>
+
+<script>
+	mapboxgl.accessToken = 'pk.eyJ1IjoiamFjZXljIiwiYSI6ImNrZzJiNjQxMDA2aWUyem54a3phd2s0d3QifQ.mtLp6I-_UWWhgrhPRAmb8A';
+	var map = new mapboxgl.Map({
+		container: 'map',
+		style: 'mapbox://styles/mapbox/dark-v10',
+		center: [{{center_lng}}, {{center_lat}}],
+		zoom: 12
+	});
+
+	var marker = new mapboxgl.Marker({
+		'color': '#ffbf00'
+	});
+
+	// Create a LngLat object to use in the marker initialization
+	// https://docs.mapbox.com/mapbox-gl-js/api/#lnglat
+	var lngLat = {
+		lon: {{center_lng}},
+		lat: {{center_lat}}
+	};
+
+	map.on('load', function () {
+	// Add a geojson point source.
+	// Heatmap layers also work with a vector tile source.
+	map.addSource('earthquakes', {
+		'type': 'geojson',
+		'data':
+		'https://phl.carto.com/api/v2/sql?q=SELECT+*+FROM+shootings&filename=shootings&format=geojson&skipfields=cartodb_id'
+	});
+	// 'https://docs.mapbox.com/mapbox-gl-js/assets/earthquakes.geojson'
+	map.addLayer(
+		{
+			'id': 'earthquakes-heat',
+			'type': 'heatmap',
+			'source': 'earthquakes',
+			'maxzoom': 20,
+			'paint': {
+	// Increase the heatmap weight based on frequency and property magnitude
+		'heatmap-weight': [
+			'interpolate',
+		['linear'],
+		['get', 'mag'],
+		0,
+		0,
+		6,
+		1
+		],
+		// Increase the heatmap color weight weight by zoom level
+		// heatmap-intensity is a multiplier on top of heatmap-weight
+		'heatmap-intensity': [
+		'interpolate',
+		['linear'],
+		['zoom'],
+		0,
+		1,
+		20,
+		3
+		],
+		// Color ramp for heatmap.  Domain is 0 (low) to 1 (high).
+		// Begin color ramp at 0-stop with a 0-transparancy color
+		// to create a blur-like effect.
+		'heatmap-color': [
+		'interpolate',
+		['linear'],
+		['heatmap-density'],
+		0,
+		'rgba(33,102,172,0)',
+		0.2,
+		'rgb(103,169,207)',
+		0.4,
+		'rgb(209,229,240)',
+		0.6,
+		'rgb(253,219,199)',
+		0.8,
+		'rgb(239,138,98)',
+		1,
+		'rgb(178,24,43)'
+		],
+		// Adjust the heatmap radius by zoom level
+		'heatmap-radius': [
+		'interpolate',
+		['linear'],
+		['zoom'],
+		0,
+		1,
+		20,
+		15
+		],
+		// Transition from heatmap to circle layer by zoom level
+		'heatmap-opacity': [
+		'interpolate',
+		['linear'],
+		['zoom'],
+		7,
+		1,
+		20,
+		0
+		]
+		}
+		},
+		'waterway-label'
+		);
+
+map.addLayer(
+	{
+		'id': 'earthquakes-point',
+		'type': 'circle',
+		'source': 'earthquakes',
+		'minzoom': 7,
+		'paint': {
+			// Size circle radius by earthquake magnitude and zoom level
+		'circle-radius': 1.5,
+			// Color circle by earthquake magnitude
+			'circle-color':'grey',
+			'circle-stroke-color': 'white',
+			'circle-stroke-width': 0,
+			// Transition from heatmap to circle layer by zoom level
+			'circle-opacity': [
+			'interpolate',
+			['linear'],
+			['zoom'],
+			7,
+			0,
+			8,
+			1
+			]
+		}
+	},
+	'waterway-label'
+	);
+	marker.setLngLat(lngLat).addTo(map);
+	});
+</script>
+
+</body>
+</html>

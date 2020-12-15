@@ -39,11 +39,11 @@
       <h4 class='txt-m txt-bold mb6'>Choose a travel mode:</h4>
       <div class='mb12 mr12 toggle-group align-center'>
         <label class='toggle-container'>
-          <input name='profile' type='radio' value='walking'>
+          <input name='profile' type='radio' value='walking' checked>
           <div class='toggle toggle--active-null toggle--null'>Walking</div>
         </label>
         <label class='toggle-container'>
-          <input name='profile' type='radio' value='cycling' checked>
+          <input name='profile' type='radio' value='cycling'>
           <div class='toggle toggle--active-null toggle--null'>Cycling</div>
         </label>
         <label class='toggle-container'>
@@ -75,14 +75,14 @@
       container: 'map', // Specify the container ID
       style: 'mapbox://styles/mapbox/streets-v11', // Specify which map style to use
       center: [{{center_lng}}, {{center_lat}}], // Specify the starting position
-      zoom: 15, // Specify the starting zoom
+      zoom: 13, // Specify the starting zoom
     });
 
     // Create variables to use in getIso()
     var urlBase = 'https://api.mapbox.com/isochrone/v1/mapbox/';
     var lon = {{center_lng}};
     var lat = {{center_lat}};
-    var profile = 'cycling';
+    var profile = 'walking';
     var minutes = 10;
 
     // Create a function that sets up the Isochrone API query then makes an Ajax call
