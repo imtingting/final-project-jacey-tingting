@@ -205,9 +205,9 @@ def get_info():
 
 
 # Html
-# Html_main
-    html_main= render_template(
-        "Main.html",
+# Html_content
+    html_content= render_template(
+        "Content.html",
         address=address,
         curr_time=curr_time,
         white_pop_pct = census_data['white_pop_pct'],
@@ -217,6 +217,8 @@ def get_info():
         gini_index = census_data['gini_index'],
         poverty_rate = census_data['poverty_rate'],
         median_age = census_data['median_age'],
+        median_rent = census_data['median_rent'],
+        median_housing_value = census_data['median_housing_value'],
         nearest_market1 = nearest_market[0]['shop_name'],
         nearest_market2 = nearest_market[1]['shop_name'],
         nearest_market3 = nearest_market[2]['shop_name'],
@@ -234,7 +236,7 @@ def get_info():
         nearest_supermarket3 = nearest_supermarket[2]['shop_name'],
         distance_supermarket1 = nearest_supermarket[0]['distance_away_meters'],
         distance_supermarket2 = nearest_supermarket[1]['distance_away_meters'],
-        distance_supermarket3 = nearest_supermarket[2]['distance_away_meters'],
+        distance_supermarket3 = nearest_supermarket[2]['distance_away_meters']
         )
 
 # Html_map_poi
@@ -276,20 +278,8 @@ def get_info():
                 )
 # Basic condition map
     return render_template(
-        # "POI.html",
-        "Main.html",
-        address=address,
-        curr_time=curr_time,
-        white_pop_pct = census_data['white_pop_pct'],
-        black_pop_pct = census_data['black_pop_pct'],
-        asian_pop_pct = census_data['asian_pop_pct'],
-        hispanic_pop_pct = census_data['hispanic_pop_pct'],
-        gini_index = census_data['gini_index'],
-        poverty_rate = census_data['poverty_rate'],
-        median_age = census_data['median_age'],
-        median_rent = census_data['median_rent'],
-        median_housing_value = census_data['median_housing_value'],
-        # html_main= html_main,
+        "POI.html",
+        html_content= html_content,
         html_map_poi = html_map_poi,
         center_lng=lng,
         center_lat=lat

@@ -22,27 +22,34 @@
   –––––––––––––––––––––––––––––––––––––––––––––––––– -->
   <link rel="stylesheet" href="{{ url_for('static', filename='css/normalize.css') }}">
   <link rel="stylesheet" href="{{ url_for('static', filename='css/skeleton.css') }}">
-
-  <!-- <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}"> -->
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
   <!-- Favicon
   –––––––––––––––––––––––––––––––––––––––––––––––––– -->
   <!-- <link rel="icon" type="image/png" href="{{ url_for('static', filename='images/favicon.png') }}"> -->
 </head>
-
-<div id="container" style="width:500">
-
+<section  style="margin-left: 100px;">
+  <div id="container" style="width:500">
     <div id="header" style="background-color:a8dadc;">
-        <h1 style="margin-bottom:0;">Amenities around the address</h1></div>
-    <div id="report" style="background-color:f1faee;height:690px;width:500px;float:left;">
-        {% include 'input.html' %}
-        <br>
-        <br>
-        {{ html_content | safe }}
-    </div>
-    <div id="map" style="background-color:f1faee;height:800px;width:700px;float:right;">
+        <h1 style="margin-bottom:15px;">Amenities around the address</h1></div>
+    <div class="row">
+      <div class="five columns">
+        <div id="report" style="background-color:f1faee;height:690px;width:500px;float:left;">
+          {% include 'input.html' %}
+           <br>
+           <br>
+           {{ html_content | safe }}
+        </div>
+      </div>
+      <div id="map" class = "five columns">
         {{ html_map_poi | safe }}
+      </div>
     </div>
-</div>
+  </div>
+</section>
+
+<!-- <section  style="margin-right: 100px;">
+
+</section> -->
 
 <!-- <div id="trasportation">
   {{html_transportation | safe }}
