@@ -20,13 +20,13 @@
 
   <!-- CSS
   –––––––––––––––––––––––––––––––––––––––––––––––––– -->
-  <link rel="stylesheet" href="{{ url_for('static', filename='css/normalize.css') }}">
+  <!-- <link rel="stylesheet" href="{{ url_for('static', filename='css/normalize.css') }}"> -->
   <link rel="stylesheet" href="{{ url_for('static', filename='css/skeleton.css') }}">
-  <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+  <!-- <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}"> -->
   <!-- Favicon
   –––––––––––––––––––––––––––––––––––––––––––––––––– -->
   <!-- <link rel="icon" type="image/png" href="{{ url_for('static', filename='images/favicon.png') }}"> -->
-</head>
+</head>  
 <section  style="margin-left: 100px;">
   <div id="container" style="width:500">
     <div id="header" style="background-color:a8dadc;">
@@ -40,7 +40,7 @@
            {{ html_content | safe }}
         </div>
       </div>
-      <div id="map" class = "five columns">
+      <div id="map" class="seven colums">
         {{ html_map_poi | safe }}
       </div>
     </div>
