@@ -25,15 +25,21 @@
   <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
   <!-- Favicon
   –––––––––––––––––––––––––––––––––––––––––––––––––– -->
-  <!-- <link rel="icon" type="image/png" href="{{ url_for('static', filename='images/favicon.png') }}"> -->
+  <link rel="icon" type="image/png" href="{{ url_for('static', filename='images/favicon.png') }}">
+  
 </head>  
 <section  style="margin-left: 70px;">
   <div id="container" style="width:500px">
     <div id="header" style="background-color:a8dadc;">
         <h1 style="font-size: 2.4rem; line-height: 1.35; letter-spacing: -.08rem;">Transportation</h1></div>
         <div id="report">
-        <p>print: {{address}}</p>
-          {% include 'input.html' %}
+        <form action="{{ url_for('get_transit') }}" method="get">
+            <div>
+                <label for="address">Find an address or place</label>
+            </div>
+            <input type="text" name="address" id="address">
+            <input type="submit" value="Search">
+        </form>
           <br>
           <br>
            {{ html_trans_content | safe }}
@@ -46,7 +52,7 @@
         <form method="get" action="{{url_for('get_info')}}">
          <input type="hidden"
             name="address"
-            value={{address}}>
+            value="{{address}}">
          <button type="submit" style="  display: inline-block;
          height: 38px;
          padding: 0 30px;
@@ -70,7 +76,7 @@
         <form method="get" action="{{url_for('get_shooting')}}">
          <input type="hidden"
             name="address"
-            value={{address}}>
+            value="{{ address }}">
          <button type="submit" style="  display: inline-block;
          height: 38px;
          padding: 0 30px;

@@ -287,7 +287,7 @@ def get_info():
 # Basic condition map
     return render_template(
         "POI.html",
-        input_address=user_input.address,
+        address=address,
         html_content= html_content,
         html_map_poi = html_map_poi,
         center_lng=lng,
@@ -296,11 +296,24 @@ def get_info():
 
 # @app.route("/basic/", methods=["GET"])
 
-@app.route("/transit/")
+@app.route("/transit/", methods=["GET"])
 def get_transit():
-    lng=user_input.lng
-    lat=user_input.lat
-    address=user_input.address
+    address = request.args.get("address")
+    if address is None:
+        user_input.address="Meyerson Hall, Philadelphia"
+        return f"""
+        <p>No address specified, try:</p>
+        <div>
+        <a href="{url_for('info', address='Meyerson Hall, University of Pennsylvania')}">{url_for('info', address='Meyerson Hall, University of Pennsylvania')}</a>
+        </div>
+        """
+    user_input.address=address
+    geocoding_call = (
+        "https://api.mapbox.com/geocoding/v5/mapbox.places/"
+        f"{address}.json?access_token={MAPBOX_TOKEN}"
+    )
+    resp = requests.get(geocoding_call)
+    lng, lat = resp.json()["features"][0]["center"]
 #Transit query
     query_bus = text("""
     SELECT "Stop_Name","Mode","Latitude","Longitude",geometry,
@@ -360,6 +373,7 @@ def get_transit():
 
     html_trans_content = render_template(
         "trans_content.html",
+        address=address,
         bus_stop1=bus['Stop_Name'][0],
         bus_stop2=bus['Stop_Name'][1],
         bus_stop3=bus['Stop_Name'][2],
@@ -379,7 +393,7 @@ def get_transit():
 
     return render_template(
     "TransportationPage.html",
-    address=user_input.address,
+    address=address,
     html_trans_map = html_trans_map,
     html_trans_content = html_trans_content
     )
@@ -410,7 +424,7 @@ def census_download():
 # 404 page example
 @app.errorhandler(404)
 def page_not_found(e):
-    return render_template("null_island.html", mapbox_token=MAPBOX_TOKEN), 404
+    return render_template("error_page.html", mapbox_token=MAPBOX_TOKEN), 404
 
 if __name__ == "__main__":
     app.jinja_env.auto_reload = True

@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html>
+  <head>
+
+    <!-- Basic Page Needs
+    –––––––––––––––––––––––––––––––––––––––––––––––––– -->
+    <meta charset="utf-8">
+    <title>Basic Condition & Amenity</title>
+    <meta name="description" content="">
+    <meta name="author" content="">
+  
+    <!-- Mobile Specific Metas
+    –––––––––––––––––––––––––––––––––––––––––––––––––– -->
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+  
+    <!-- FONT
+    –––––––––––––––––––––––––––––––––––––––––––––––––– -->
+    <link href="//fonts.googleapis.com/css?family=Raleway:400,300,600" rel="stylesheet" type="text/css">
+  
+    <!-- CSS
+    –––––––––––––––––––––––––––––––––––––––––––––––––– -->
+    <!-- <link rel="stylesheet" href="{{ url_for('static', filename='css/normalize.css') }}"> -->
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/skeleton.css') }}">
+    <!-- <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}"> -->
+    <!-- Favicon
+    –––––––––––––––––––––––––––––––––––––––––––––––––– -->
+    <link rel="icon" type="image/png" href="{{ url_for('static', filename='images/favicon.png') }}">
+  
+  </head>  
+  <body>
+    <div id="error" style="position:absolute; left:400px; top:90px;">
+      <img  src="{{ url_for('static', filename='images/404.png') }}" alt="404 error" width="800px" height="400px">
+    </div>
+    <div id="error text" style="position:absolute; left:400px; top:500px">
+      <h1>Back to Main Page</h1>
+      <div style = "position:absolute;left:1065px; top: 500px"></div>
+        <form action="{{url_for('index')}}">
+         <button class="button" type="submit">Main Page</button>
+        </form>
+      </div>
+    </div>
+  </body>
+</html>

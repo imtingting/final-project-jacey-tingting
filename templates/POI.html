@@ -6,7 +6,7 @@
   <!-- Basic Page Needs
   –––––––––––––––––––––––––––––––––––––––––––––––––– -->
   <meta charset="utf-8">
-  <title>Nearest Amenity</title>
+  <title>Basic Condition & Amenity</title>
   <meta name="description" content="">
   <meta name="author" content="">
 
@@ -25,14 +25,14 @@
   <!-- <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}"> -->
   <!-- Favicon
   –––––––––––––––––––––––––––––––––––––––––––––––––– -->
-  <!-- <link rel="icon" type="image/png" href="{{ url_for('static', filename='images/favicon.png') }}"> -->
+  <link rel="icon" type="image/png" href="{{ url_for('static', filename='images/favicon.png') }}">
+
 </head>  
 <section  style="margin-left: 70px;">
   <div id="container" style="width:500px">
     <div id="header" style="background-color:a8dadc;">
         <h1>Basic Condition & Amenity</h1></div>
         <div id="report">
-          <p>print: {{input_address}}</p>
           {% include 'input.html' %}
            {{ html_content | safe }}
         </div>
@@ -41,7 +41,10 @@
     {{ html_map_poi | safe }}
   </div>
     <div style = "position:absolute;left:620px; top: 30px">
-        <form action="{{url_for('get_transit')}}">
+        <form method="get" action="{{url_for('get_transit')}}">
+          <input type="hidden"
+            name="address"
+            value="{{address}}">
          <button class="button" type="submit">Transportation</button>
         </form>
     </div>
