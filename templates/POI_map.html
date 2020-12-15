@@ -9,13 +9,8 @@
 <link href="/static/css/map.css" rel="stylesheet" />
 <link href="https://api.mapbox.com/mapbox-gl-js/v1.12.0/mapbox-gl.css" rel="stylesheet" />
 
-
-<!-- <style>
-	body { margin: 0; padding: 0; }
-	#map { position: absolute; top: 0; bottom: 0; width: 100%; }
-</style> -->
-
-<div id="map"></div>
+<body>
+    <div id="map"></div>
 <nav id="filter-group" class="filter-group"></nav>
 
 <script>
@@ -42,7 +37,7 @@
                 'properties': {
                     'icon': 'convenience',
                     'description':
-                         "<strong>Seersucker Bike Ride and Social</strong><p>Feeling dandy? Get fancy, grab your bike, and take part in this year's Seersucker Social bike ride from Dandies and Quaintrelles. After the ride enjoy a lawn party at Hillwood with jazz, cocktails, paper hat-making, and more. 11:00-7:00 p.m.</p>"
+                         "<p><strong>Name: </strong> {{market1_name}}</P> <p><strong>Phone Number: </strong> {{market1_phone}} </P>"
                 },
                 'geometry': {
                     'type': 'Point',
@@ -52,7 +47,9 @@
             {
                 'type': 'Feature',
                 'properties': {
-                    'icon': 'convenience'
+                    'icon': 'convenience',
+                    'description':
+                         "<p><strong>Name: </strong> {{market2_name}}</P> <p><strong>Phone Number: </strong> {{market2_phone}} </P>"
                 },
                 'geometry': {
                     'type': 'Point',
@@ -62,7 +59,9 @@
             {
                 'type': 'Feature',
                 'properties': {
-                    'icon': 'convenience'
+                    'icon': 'convenience',
+                    'description':
+                         "<p><strong>Name: </strong> {{market3_name}}</P> <p><strong>Phone Number: </strong> {{market3_phone}} </P>"
                 },
                 'geometry': {
                     'type': 'Point',
@@ -72,27 +71,9 @@
             {
                 'type': 'Feature',
                 'properties': {
-                    'icon': 'convenience'
-                },
-                'geometry': {
-                    'type': 'Point',
-                    'coordinates': [{{ market4_lng }}, {{ market4_lat }}]
-                }
-            },
-            {
-                'type': 'Feature',
-                'properties': {
-                    'icon': 'convenience'
-                },
-                'geometry': {
-                    'type': 'Point',
-                    'coordinates': [{{ market5_lng }}, {{ market5_lat }}]
-                }
-            },
-            {
-                'type': 'Feature',
-                'properties': {
-                    'icon': 'fast-food'
+                    'icon': 'fast-food',
+                    'description':
+                         "<p><strong>Name: </strong> {{fast_food1_name}}</P> <p><strong>Phone Number: </strong> {{fast_food1__phone}} </P>"
                 },
                 'geometry': {
                     'type': 'Point',
@@ -102,7 +83,9 @@
             {
                 'type': 'Feature',
                 'properties': {
-                    'icon': 'fast-food'
+                    'icon': 'fast-food',
+                    'description':
+                         "<p><strong>Name: </strong> {{fast_food2_name}}</P> <p><strong>Phone Number: </strong> {{fast_food2__phone}} </P>"
                 },
                 'geometry': {
                     'type': 'Point',
@@ -112,7 +95,9 @@
             {
                 'type': 'Feature',
                 'properties': {
-                    'icon': 'fast-food'
+                    'icon': 'fast-food',
+                    'description':
+                         "<p><strong>Name: </strong> {{fast_food3_name}}</P> <p><strong>Phone Number: </strong> {{fast_food3__phone}} </P>"
                 },
                 'geometry': {
                     'type': 'Point',
@@ -122,29 +107,9 @@
             {
                 'type': 'Feature',
                 'properties': {
-                    'icon': 'fast-food'
-                },
-                'geometry': {
-                    'type': 'Point',
-                    'coordinates': [{{ fast_food4_lng }}, {{ fast_food4_lat }}]
-                }
-            },
-            {
-                'type': 'Feature',
-                'properties': {
-                    'icon': 'fast-food'
-                },
-                'geometry': {
-                    'type': 'Point',
-                    'coordinates': [{{ fast_food5_lng }}, {{ fast_food5_lat }}]
-                }
-            },
-            {
-                'type': 'Feature',
-                'properties': {
                     'icon': 'grocery',
                     'description':
-                         "<strong>Seersucker Bike Ride and Social</strong><p>Feeling dandy? Get fancy, grab your bike, and take part in this year's Seersucker Social bike ride from Dandies and Quaintrelles. After the ride enjoy a lawn party at Hillwood with jazz, cocktails, paper hat-making, and more. 11:00-7:00 p.m.</p>"
+                         "<p><strong>Name: </strong> {{supermarket1_name}}</P> <p><strong>Phone Number: </strong> {{supermarket1__phone}} </P>"
                 },
                 'geometry': {
                     'type': 'Point',
@@ -154,7 +119,9 @@
             {
                 'type': 'Feature',
                 'properties': {
-                    'icon': 'grocery'
+                    'icon': 'grocery',
+                    'description':
+                         "<p><strong>Name: </strong> {{supermarket2_name}}</P> <p><strong>Phone Number: </strong> {{supermarket2__phone}} </P>"
                 },
                 'geometry': {
                     'type': 'Point',
@@ -164,33 +131,15 @@
             {
                 'type': 'Feature',
                 'properties': {
-                    'icon': 'grocery'
+                    'icon': 'grocery',
+                    'description':
+                         "<p><strong>Name: </strong> {{supermarket3_name}}</P> <p><strong>Phone Number: </strong> {{supermarket3__phone}} </P>"
                 },
                 'geometry': {
                     'type': 'Point',
                     'coordinates': [{{ supermarket3_lng }}, {{ supermarket3_lat }}]
                 }
             },
-            {
-                'type': 'Feature',
-                'properties': {
-                    'icon': 'grocery'
-                },
-                'geometry': {
-                    'type': 'Point',
-                    'coordinates': [{{ supermarket4_lng }}, {{ supermarket4_lat }}]
-                }
-            },
-            {
-                'type': 'Feature',
-                'properties': {
-                    'icon': 'grocery'
-                },
-                'geometry': {
-                    'type': 'Point',
-                    'coordinates': [{{ supermarket5_lng }}, {{ supermarket5_lat }}]
-                }
-            }
         ]
     };
 
@@ -292,6 +241,5 @@
     });
 
 </script>
-
 </body>
 </html>
