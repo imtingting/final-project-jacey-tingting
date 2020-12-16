@@ -1,5 +1,5 @@
 ## Livable Philly
-The application aims to demographic and social-economic information, nearby amenities, transportation condition, and crime density for any place in Philadelphia.
+The application aims to provide demographic and social-economic information, nearby amenities, transportation condition, and crime density for any place in Philadelphia to users.
 <br>[Proposal](https://github.com/MUSA-509/final-project-jacey-tingting/blob/main/FinalProjectProposal.md)
 ![webarc](https://github.com/MUSA-509/final-project-jacey-tingting/blob/main/Web_Architecture.png)
 There are four web pages in the app.
@@ -15,13 +15,13 @@ There are four web pages in the app.
 ## Data
 
 *Crime data*
-<br>https://cityofphiladelphia.github.io/carto-api-explorer/#incidents_part1_part2, queried from carto.
+<br>shooting victim data: https://phl.carto.com/api/v2/sql?q=SELECT+*+FROM+shootings&filename=shootings&format=geojson&skipfields=cartodb_id, queried from carto.
 
 *Public transportation stops*
-<br> The data is downloaded from https://www3.septa.org/hackathon/Stops/index.php?req1=65 and stored in AWS database, queried by pgAdmin.
+<br> SEPTA stop and station location: https://services2.arcgis.com/9U43PSoL47wawX5S/arcgis/rest/services/Spring_2019_Stops_By_Route/FeatureServer/0/query?where=1%3D1&outFields=*&outSR=4326&f=json , the data is stored in AWS database, queried by pgAdmin.
 
 *Amenities*
 <br> Open street map, queried by Big Query
 
 *Basic Information*
-<br>Race, age economics and housing value data come from ACS 2018 Census data. Queried by Big Query
+<br>Race, age economics and housing value data come from ACS 2018 Census data. Queried by Big Query.
