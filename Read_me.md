@@ -3,13 +3,13 @@ The application aims to demographic and social-economic information, nearby amen
 ![webarc](https://github.com/MUSA-509/final-project-jacey-tingting/blob/main/Web_Architecture.png)
 There are four web pages in the app.
 ### Homepage
-![indexpage](https://github.com/MUSA-509/final-project-jacey-tingting/row/main/Index_preview.png)
+![indexpage](https://github.com/MUSA-509/final-project-jacey-tingting/blob/main/Index_preview.png)
 ### Basic Info & Amenity
-![basicpage](https://github.com/MUSA-509/final-project-jacey-tingting/row/main/Amenity_preview.png)
+![basicpage](https://github.com/MUSA-509/final-project-jacey-tingting/blob/main/Amenity_preview.png)
 ### Transportation
-![transpage](https://github.com/MUSA-509/final-project-jacey-tingting/row/main/transportation_preview.png)
+![transpage](https://github.com/MUSA-509/final-project-jacey-tingting/blob/main/transportation_preview.png)
 ### Crime
-![crimepage](https://github.com/MUSA-509/final-project-jacey-tingting/row/main/crime.png)
+![crimepage](https://github.com/MUSA-509/final-project-jacey-tingting/blob/main/crime.png)
 
 ## Data
 
