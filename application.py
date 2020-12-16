@@ -13,7 +13,7 @@ from sqlalchemy.sql import text, bindparam
 from google.cloud import bigquery
 import geopandas as gpd
 from shapely.geometry import shape
-# from datetime import datetime
+from datetime import datetime
 from cartoframes.viz import Layer, Map, color_category_style, popup_element
 
 from bokeh.plotting import figure
@@ -24,7 +24,7 @@ from shapely import wkt
 bokeh_css = CSSResources(mode="cdn", version="2.2.3", minified=True)
 bokeh_js = JSResources(mode="cdn", version="2.2.3", minified=True)
 
-app = Flask(__name__, template_folder="templates")
+application = Flask(__name__, template_folder="templates")
 
 bqclient = bigquery.Client.from_service_account_json("Musa509-Lab5-42148b13cb70.json")
 
@@ -52,7 +52,7 @@ class UserInput():
 user_input=UserInput()
 
 # index page
-@app.route("/")
+@application.route("/")
 def index():
     """Index page"""
     return render_template("index.html")
@@ -108,7 +108,7 @@ def get_geo_tract(lng, lat):
 
 
 # Get address and report information
-@app.route("/info/", methods=["GET"])
+@application.route("/info/", methods=["GET"])
 def get_info():
     address = request.args.get("address")
     if address is None:
@@ -258,7 +258,7 @@ def get_info():
                 market3_name = nearest_market[2]['shop_name'],
                 market1_phone = nearest_market[0]['phone_number'],
                 market2_phone = nearest_market[1]['phone_number'],
-                market3_phone = nearest_market[2]['phone_number'],                
+                market3_phone = nearest_market[2]['phone_number'],
                 fast_food1_lng = nearest_fast_food[0]['longitude'],
                 fast_food2_lng = nearest_fast_food[1]['longitude'],
                 fast_food3_lng = nearest_fast_food[2]['longitude'],
@@ -270,7 +270,7 @@ def get_info():
                 fast_food3_name = nearest_fast_food[2]['amenity_name'],
                 fast_food1_phone = nearest_fast_food[0]['phone_number'],
                 fast_food2_phone = nearest_fast_food[1]['phone_number'],
-                fast_food3_phone = nearest_fast_food[2]['phone_number'],  
+                fast_food3_phone = nearest_fast_food[2]['phone_number'],
                 supermarket1_lng = nearest_supermarket[0]['longitude'],
                 supermarket2_lng = nearest_supermarket[1]['longitude'],
                 supermarket3_lng = nearest_supermarket[2]['longitude'],
@@ -294,9 +294,9 @@ def get_info():
         center_lat=lat
         )
 
-# @app.route("/basic/", methods=["GET"])
+# @application.route("/basic/", methods=["GET"])
 
-@app.route("/transit/", methods=["GET"])
+@application.route("/transit/", methods=["GET"])
 def get_transit():
     address = request.args.get("address")
     if address is None:
@@ -399,7 +399,7 @@ def get_transit():
     )
 
 
-@app.route("/shooting/")
+@application.route("/shooting/")
 def get_shooting():
     lng=user_input.lng
     lat=user_input.lat
@@ -411,22 +411,22 @@ def get_shooting():
     address=address
     )
 
-@app.route("/census_download", methods=["GET"])
+@application.route("/census_download", methods=["GET"])
 def census_download():
     """Download GeoJSON of data snapshot"""
     lng = request.args["lng"]
     lat = request.args["lat"]
     data = get_geo_tract(lng, lat)
-    
+
     return Response(data.to_json(), 200, mimetype="application/json")
 
 
 # 404 page example
-@app.errorhandler(404)
+@application.errorhandler(404)
 def page_not_found(e):
     return render_template("error_page.html", mapbox_token=MAPBOX_TOKEN), 404
 
 if __name__ == "__main__":
-    app.jinja_env.auto_reload = True
-    app.config["TEMPLATES_AUTO_RELOAD"] = True
-    app.run(debug=True)
+    application.jinja_env.auto_reload = True
+    application.config["TEMPLATES_AUTO_RELOAD"] = True
+    application.run(debug=True)
