@@ -1,6 +1,6 @@
 ## Livable Philly
 The application aims to demographic and social-economic information, nearby amenities, transportation condition, and crime density for any place in Philadelphia.
-![webarc](https://github.com/MUSA-509/final-project-jacey-tingting/row/main/Web_Architecture.png)
+![webarc](https://github.com/MUSA-509/final-project-jacey-tingting/blob/main/Web_Architecture.png)
 There are four web pages in the app.
 ### Homepage
 ![indexpage](https://github.com/MUSA-509/final-project-jacey-tingting/row/main/Index_preview.png)
