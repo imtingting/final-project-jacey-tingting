@@ -13,7 +13,7 @@ from sqlalchemy.sql import text, bindparam
 from google.cloud import bigquery
 import geopandas as gpd
 from shapely.geometry import shape
-from datetime import datetime
+# from datetime import datetime
 from cartoframes.viz import Layer, Map, color_category_style, popup_element
 
 from bokeh.plotting import figure
