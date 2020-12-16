@@ -24,5 +24,3 @@ There are four web pages in the app.
 
 *Basic Information*
 <br>Race, age economics and housing value data come from ACS 2018 Census data. Queried by Big Query
-
-The dataset will be hosted by Google BigQuery.
