@@ -26,12 +26,12 @@
   <!-- Favicon
   –––––––––––––––––––––––––––––––––––––––––––––––––– -->
   <link rel="icon" type="image/png" href="{{ url_for('static', filename='images/favicon.png') }}">
-
-</head>
+  
+</head>  
 <section  style="margin-left: 70px;">
-  <div id="container" style="width:500px; font-family: "Raleway", "HelveticaNeue", "Helvetica Neue", Helvetica, Arial, sans-serif;">
+  <div id="container" style="width:500px">
     <div id="header" style="background-color:a8dadc;">
-        <h2>Transportation</h2></div>
+        <h1 style="font-size: 2.4rem; line-height: 1.35; letter-spacing: -.08rem;">Transportation</h1></div>
         <div id="report">
         <form action="{{ url_for('get_transit') }}" method="get">
             <div>
@@ -40,6 +40,8 @@
             <input type="text" name="address" id="address">
             <input type="submit" value="Search">
         </form>
+          <br>
+          <br>
            {{ html_trans_content | safe }}
         </div>
   </div>
