@@ -23,17 +23,16 @@ be listed by housing types.
 ## Data
 
 *Crime data*
-<br>https://cityofphiladelphia.github.io/carto-api-explorer/#incidents_part1_part2
+<br>https://cityofphiladelphia.github.io/carto-api-explorer/#incidents_part1_part2, queried from carto.
 
 *Public transportation stops*
-<br>https://www3.septa.org/hackathon/Stops/index.php?req1=65
+<br> The data is downloaded from https://www3.septa.org/hackathon/Stops/index.php?req1=65 and stored in AWS database, queried by pgAdmin.
 
-*Grocery, Park*
-<br>Mapbox API
+*Amenities*
+<br> Open street map, queried by Big Query
 
-*Rent*
-<br>Zillow or census data
-<br>https://www.zillow.com/research/data/
+*Basic Information*
+<br>Race, age economics and housing value data come from ACS 2018 Census data. Queried by Big Query
 
 The dataset will be hosted by Google BigQuery.
 
