@@ -22,9 +22,9 @@
       <p> Put an address below to explore!</p>
       <p>You may want to search:</p>
       <ul>
-        <p>Center City: 210 W Rittenhouse Square, Philadelphia</p>
-        <p>University City: 3900 Chestnut Street, Philadelphia</p>
-        <p>North Philadelphia: 1801 N Broad St, Philadelphia</p>
+          <p>Center City: <a href="{{ url_for('get_info', address='210 W Rittenhouse Square, Philadelphia') }}">210 W Rittenhouse Square, Philadelphia</a></p>
+          <p>University City: <a href="{{ url_for('get_info', address='3900 Chestnut Street, Philadelphia') }}">3900 Chestnut Street, Philadelphia</a></p>
+          <p>North Philadelphia: <a href="{{ url_for('get_info', address='1801 N Broad St, Philadelphia') }}">1801 N Broad St, Philadelphia</a></p>
         <!-- <p>South Philadelphia: 2140 S 10th St, Philadelphia</p> -->
       </ul>
       <footer>
