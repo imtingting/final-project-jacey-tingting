@@ -1,4 +1,5 @@
 ## Livable Philly
+###[Launch the app](http://tolivablephilly-env.eba-wa279umj.us-east-1.elasticbeanstalk.com/)
 The application aims to provide demographic and social-economic information, nearby amenities, transportation condition, and crime density for any place in Philadelphia to users.
 <br>[Proposal](https://github.com/MUSA-509/final-project-jacey-tingting/blob/main/FinalProjectProposal.md)
 ![webarc](https://github.com/MUSA-509/final-project-jacey-tingting/blob/main/Web_Architecture.png)
