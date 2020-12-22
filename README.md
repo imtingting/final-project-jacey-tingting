@@ -3,15 +3,6 @@
 <br>The application aims to provide demographic and social-economic information, nearby amenities, transportation condition, and crime density for any place in Philadelphia to users.
 <br>[Proposal](https://github.com/MUSA-509/final-project-jacey-tingting/blob/main/FinalProjectProposal.md)
 ![webarc](https://github.com/MUSA-509/final-project-jacey-tingting/blob/main/Web_Architecture.png)
-There are four web pages in the app.
-### Homepage
-![indexpage](https://github.com/MUSA-509/final-project-jacey-tingting/blob/main/Index_preview.png)
-### Basic Info & Amenity
-![basicpage](https://github.com/MUSA-509/final-project-jacey-tingting/blob/main/Amenity_preview.png)
-### Transportation
-![transpage](https://github.com/MUSA-509/final-project-jacey-tingting/blob/main/transportation_preview.png)
-### Crime
-![crimepage](https://github.com/MUSA-509/final-project-jacey-tingting/blob/main/crime.png)
 
 ## Data
 
@@ -26,3 +17,13 @@ There are four web pages in the app.
 
 *Basic Information*
 <br>Race, age economics and housing value data come from ACS 2018 Census data. Queried by Big Query.
+
+There are four web pages in the app.
+### Homepage
+![indexpage](https://github.com/MUSA-509/final-project-jacey-tingting/blob/main/Index_preview.png)
+### Basic Info & Amenity
+![basicpage](https://github.com/MUSA-509/final-project-jacey-tingting/blob/main/Amenity_preview.png)
+### Transportation
+![transpage](https://github.com/MUSA-509/final-project-jacey-tingting/blob/main/transportation_preview.png)
+### Crime
+![crimepage](https://github.com/MUSA-509/final-project-jacey-tingting/blob/main/crime.png)
