@@ -4,6 +4,17 @@
 <br>[Proposal](https://github.com/MUSA-509/final-project-jacey-tingting/blob/main/FinalProjectProposal.md)
 ![webarc](https://github.com/MUSA-509/final-project-jacey-tingting/blob/main/Web_Architecture.png)
 
+<br>
+There are four web pages in the app.
+### Homepage
+![indexpage](https://github.com/imtingting/final-project-jacey-tingting/blob/main/demo/index_page.gif)
+### Basic Info & Amenity
+![basicpage](https://github.com/imtingting/final-project-jacey-tingting/blob/main/demo/basic_amenity.gif)
+### Transportation
+![transpage](https://github.com/imtingting/final-project-jacey-tingting/blob/main/demo/transportation.gif)
+### Crime
+![crimepage](https://github.com/imtingting/final-project-jacey-tingting/blob/main/demo/crime_density.gif)
+
 ## Data
 
 *Crime data*
@@ -17,13 +28,3 @@
 
 *Basic Information*
 <br>Race, age economics and housing value data come from ACS 2018 Census data. Queried by Big Query.
-
-There are four web pages in the app.
-### Homepage
-![indexpage](https://github.com/imtingting/final-project-jacey-tingting/blob/main/demo/index_page.gif)
-### Basic Info & Amenity
-![basicpage](https://github.com/imtingting/final-project-jacey-tingting/blob/main/demo/basic_amenity.gif)
-### Transportation
-![transpage](https://github.com/imtingting/final-project-jacey-tingting/blob/main/demo/transportation.gif)
-### Crime
-![crimepage](https://github.com/imtingting/final-project-jacey-tingting/blob/main/demo/crime_density.gif)
