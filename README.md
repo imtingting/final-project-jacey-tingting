@@ -20,7 +20,7 @@
 
 There are four web pages in the app.
 ### Homepage
-![indexpage](https://github.com/imtingting/final-project-jacey-tingting/blob/main/demo/basic_amenity.gif)
+![indexpage](https://github.com/imtingting/final-project-jacey-tingting/blob/main/demo/index_page.gif)
 ### Basic Info & Amenity
 ![basicpage](https://github.com/imtingting/final-project-jacey-tingting/blob/main/demo/basic_amenity.gif)
 ### Transportation
