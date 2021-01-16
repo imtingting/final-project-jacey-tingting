@@ -20,10 +20,10 @@
 
 There are four web pages in the app.
 ### Homepage
-![indexpage](https://github.com/MUSA-509/final-project-jacey-tingting/blob/main/demo/index_page.gif)
+![indexpage](https://github.com/imtingting/final-project-jacey-tingting/blob/main/demo/basic_amenity.gif)
 ### Basic Info & Amenity
-![basicpage](https://github.com/MUSA-509/final-project-jacey-tingting/blob/main/demo/basic_amenity.gif)
+![basicpage](https://github.com/imtingting/final-project-jacey-tingting/blob/main/demo/basic_amenity.gif)
 ### Transportation
-![transpage](https://github.com/MUSA-509/final-project-jacey-tingting/blob/main/demo/transportation.gif)
+![transpage](https://github.com/imtingting/final-project-jacey-tingting/blob/main/demo/transportation.gif)
 ### Crime
-![crimepage](https://github.com/MUSA-509/final-project-jacey-tingting/blob/main/demo/crime_density.gif)
+![crimepage](https://github.com/imtingting/final-project-jacey-tingting/blob/main/demo/crime_density.gif)
