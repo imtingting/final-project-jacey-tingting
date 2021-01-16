@@ -4,7 +4,6 @@
 <br>[Proposal](https://github.com/MUSA-509/final-project-jacey-tingting/blob/main/FinalProjectProposal.md)
 ![webarc](https://github.com/MUSA-509/final-project-jacey-tingting/blob/main/Web_Architecture.png)
 
-<br>
 There are four web pages in the app.
 ### Homepage
 ![indexpage](https://github.com/imtingting/final-project-jacey-tingting/blob/main/demo/index_page.gif)
